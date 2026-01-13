@@ -3,6 +3,7 @@ package org.work.project.presentation.view
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,7 +35,7 @@ fun LogInScreen(){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier.fillMaxSize().fillMaxWidth(0.5f),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -65,7 +66,7 @@ fun LogInScreen(){
             onClick = {
 
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(0.3f),
             colors = ButtonDefaults.textButtonColors(
                 containerColor = secondaryColor,
                 contentColor = Color.White
