@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -14,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
@@ -23,6 +26,8 @@ import coursetrackermp.composeapp.generated.resources.password_text
 import coursetrackermp.composeapp.generated.resources.username_text
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.presentation.components.CustomTextField
+import org.work.project.presentation.ui.CourseTrackerTheme
+import org.work.project.presentation.ui.secondaryColor
 
 @Composable
 fun LogInScreen(){
@@ -60,7 +65,11 @@ fun LogInScreen(){
             onClick = {
 
             },
-
+            modifier = Modifier.fillMaxWidth(0.5f),
+            colors = ButtonDefaults.textButtonColors(
+                containerColor = secondaryColor,
+                contentColor = Color.White
+            )
 
 
         ){
