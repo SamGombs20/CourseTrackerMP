@@ -34,7 +34,7 @@ fun LogInScreen(){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().fillMaxWidth(0.5f),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -65,7 +65,7 @@ fun LogInScreen(){
             onClick = {
 
             },
-            modifier = Modifier.fillMaxWidth(0.5f),
+            modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.textButtonColors(
                 containerColor = secondaryColor,
                 contentColor = Color.White
