@@ -1,5 +1,6 @@
 package org.work.project.presentation.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -7,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -17,7 +20,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
@@ -25,6 +32,7 @@ import coursetrackermp.composeapp.generated.resources.log_in
 import coursetrackermp.composeapp.generated.resources.log_in_title
 import coursetrackermp.composeapp.generated.resources.password_text
 import coursetrackermp.composeapp.generated.resources.username_text
+import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.ui.CourseTrackerTheme
@@ -35,13 +43,31 @@ fun LogInScreen(){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.size(300 .dp, 300 .dp)
+            .dropShadow(
+                shape = RoundedCornerShape(20 .dp),
+                shadow = Shadow(
+                    radius = 10 .dp,
+                    spread = 6 .dp,
+                    color = Color.Gray,
+                    offset = DpOffset(4 .dp, 4 .dp)
+                )
+            )
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(20 .dp)
+            ),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
+            text = stringResource(Res.string.welcome),
+            fontSize = 16 .sp,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
             text = stringResource(Res.string.log_in_title),
-            fontSize = 18 .sp
+            fontSize = 12 .sp
 
         )
         Spacer(Modifier.height(16 .dp))
