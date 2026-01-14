@@ -1,6 +1,7 @@
 <resources>
-    <string name="log_in_title">Sign in to your account</string>
+    <string name="log_in_title">Sign in to manage you courses.</string>
     <string name="username_text">Email</string>
     <string name= "password_text">Password</string>
+    <string name="welcome" >Welcome Back!</string>
     <string name="log_in">Sign in</string>
 </resources>
