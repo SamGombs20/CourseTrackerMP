@@ -4,8 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
+
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -20,11 +19,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
@@ -35,7 +32,6 @@ import coursetrackermp.composeapp.generated.resources.username_text
 import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.presentation.components.CustomTextField
-import org.work.project.presentation.ui.CourseTrackerTheme
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
@@ -43,15 +39,10 @@ fun LogInScreen(){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier.size(400 .dp, 400 .dp)
-            .dropShadow(
-                shape = RoundedCornerShape(20 .dp),
-                shadow = Shadow(
-                    radius = 6 .dp,
-                    spread = 4 .dp,
-                    color = Color.Gray,
-                    offset = DpOffset(4 .dp, 4 .dp)
-                )
+        modifier = Modifier.size(350 .dp, 350 .dp)
+            .shadow(
+                10 .dp,
+                shape = RoundedCornerShape(20.dp)
             )
             .background(
                 color = Color.White,

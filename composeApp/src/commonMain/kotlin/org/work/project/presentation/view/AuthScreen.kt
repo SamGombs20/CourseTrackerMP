@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.courseTracker
 import coursetrackermp.composeapp.generated.resources.welcome
@@ -36,16 +38,20 @@ fun AuthScreen(){
             Image(
                 painter = painterResource(Res.drawable.courseTracker),
                 contentDescription = stringResource(Res.string.welcome),
-                modifier = Modifier.size(20 .dp)
+                modifier = Modifier.size(48 .dp)
             )
             Row {
                 Text(
                     text = "Course",
-                    color = primaryColor
+                    color = primaryColor,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18 .sp
                 )
                 Text(
                     text = "Tracker",
-                    color = secondaryColor
+                    color = secondaryColor,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18 .sp
                 )
             }
         }
