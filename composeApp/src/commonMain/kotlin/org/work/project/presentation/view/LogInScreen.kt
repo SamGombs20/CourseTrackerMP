@@ -43,12 +43,12 @@ fun LogInScreen(){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier.size(300 .dp, 300 .dp)
+        modifier = Modifier.size(400 .dp, 400 .dp)
             .dropShadow(
                 shape = RoundedCornerShape(20 .dp),
                 shadow = Shadow(
-                    radius = 10 .dp,
-                    spread = 6 .dp,
+                    radius = 6 .dp,
+                    spread = 4 .dp,
                     color = Color.Gray,
                     offset = DpOffset(4 .dp, 4 .dp)
                 )
