@@ -3,5 +3,8 @@
     <string name="username_text">Email</string>
     <string name= "password_text">Password</string>
     <string name="welcome" >Welcome Back!</string>
-    <string name="log_in">Sign in</string>
+    <string name="log_in">Log in</string>
+    <string name="no_account">Don't have an account?</string>
+    <string name="sign_up">Sign up</string>
+
 </resources>

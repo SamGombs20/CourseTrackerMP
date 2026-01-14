@@ -1,14 +1,16 @@
 package org.work.project.presentation.view
 
-import androidx.compose.foundation.background
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.padding
+
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -18,8 +20,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,7 +29,9 @@ import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.log_in
 import coursetrackermp.composeapp.generated.resources.log_in_title
+import coursetrackermp.composeapp.generated.resources.no_account
 import coursetrackermp.composeapp.generated.resources.password_text
+import coursetrackermp.composeapp.generated.resources.sign_up
 import coursetrackermp.composeapp.generated.resources.username_text
 import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.stringResource
@@ -35,19 +39,13 @@ import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
-fun LogInScreen(){
+fun LogInScreen(
+    pageToggle:(Boolean)-> Unit
+){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier.size(350 .dp, 350 .dp)
-            .shadow(
-                10 .dp,
-                shape = RoundedCornerShape(20.dp)
-            )
-            .background(
-                color = Color.White,
-                shape = RoundedCornerShape(20 .dp)
-            ),
+        modifier = Modifier.fillMaxSize().padding(16 .dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -61,7 +59,7 @@ fun LogInScreen(){
             fontSize = 12 .sp
 
         )
-        Spacer(Modifier.height(16 .dp))
+        Spacer(Modifier.height(8 .dp))
         CustomTextField(
             value = username,
             onChange = {
@@ -70,7 +68,7 @@ fun LogInScreen(){
             label = stringResource(Res.string.username_text)
 
         )
-        Spacer(Modifier.height(16 .dp))
+        Spacer(Modifier.height(8 .dp))
         CustomTextField(
             value = password,
             onChange = {
@@ -78,12 +76,31 @@ fun LogInScreen(){
             },
             label = stringResource(Res.string.password_text)
         )
-        Spacer(Modifier.height(16 .dp))
+        Spacer(Modifier.height(4 .dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(Res.string.no_account),
+                fontSize = 14 .sp
+            )
+            TextButton(
+                onClick = {
+                    pageToggle(true)
+                },
+
+            ){
+                Text(
+                    text = stringResource(Res.string.sign_up)
+                )
+            }
+        }
+        Spacer(Modifier.height(4 .dp))
         TextButton(
             onClick = {
 
             },
-            modifier = Modifier.fillMaxWidth(0.3f),
+            modifier = Modifier.fillMaxWidth(0.9f),
             colors = ButtonDefaults.textButtonColors(
                 containerColor = secondaryColor,
                 contentColor = Color.White
