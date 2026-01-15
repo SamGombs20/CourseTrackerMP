@@ -65,7 +65,7 @@ fun AuthScreen(){
         }
         Spacer(Modifier.height(16 .dp))
         Column(
-            modifier = Modifier.size(350 .dp, 350 .dp)
+            modifier = Modifier.size(350 .dp, 450 .dp)
                 .shadow(
                     10 .dp,
                     shape = RoundedCornerShape(8.dp)

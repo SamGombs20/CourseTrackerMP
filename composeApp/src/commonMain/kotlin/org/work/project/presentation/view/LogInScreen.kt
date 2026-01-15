@@ -60,7 +60,7 @@ fun LogInScreen(
             fontSize = 12 .sp
 
         )
-        Spacer(Modifier.height(8 .dp))
+        Spacer(Modifier.height(16 .dp))
         CustomTextField(
             value = username,
             onChange = {
@@ -96,7 +96,7 @@ fun LogInScreen(
                 )
             }
         }
-        Spacer(Modifier.height(4 .dp))
+        Spacer(Modifier.height(16 .dp))
         TextButton(
             onClick = {
 
