@@ -68,11 +68,11 @@ fun AuthScreen(){
             modifier = Modifier.size(350 .dp, 350 .dp)
                 .shadow(
                     10 .dp,
-                    shape = RoundedCornerShape(20.dp)
+                    shape = RoundedCornerShape(8.dp)
                 )
                 .background(
                     color = Color.White,
-                    shape = RoundedCornerShape(20 .dp)
+                    shape = RoundedCornerShape(8 .dp)
                 ),
 
         ) {

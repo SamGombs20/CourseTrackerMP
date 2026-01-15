@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -104,7 +105,8 @@ fun LogInScreen(
             colors = ButtonDefaults.textButtonColors(
                 containerColor = secondaryColor,
                 contentColor = Color.White
-            )
+            ),
+            shape = RoundedCornerShape(16 .dp)
 
 
         ){
