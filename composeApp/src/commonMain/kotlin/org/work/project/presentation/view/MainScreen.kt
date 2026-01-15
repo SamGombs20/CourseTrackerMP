@@ -2,7 +2,6 @@ package org.work.project.presentation.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coursetrackermp.composeapp.generated.resources.Res
-import coursetrackermp.composeapp.generated.resources.app_name
 import coursetrackermp.composeapp.generated.resources.sign_out
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.presentation.ui.primaryColor
