@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">Course Tracker</string>
     <string name="log_in_title">Sign in to manage you courses.</string>
     <string name="username_text">Username</string>
     <string name= "password_text">Password</string>
@@ -14,4 +15,5 @@
     <string name="confirm">Confirm Password</string>
     <string name="existing">Already have an account?</string>
     <string name="register">Register</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
