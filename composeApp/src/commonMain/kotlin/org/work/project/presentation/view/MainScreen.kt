@@ -22,7 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coursetrackermp.composeapp.generated.resources.Res
+import coursetrackermp.composeapp.generated.resources.arrow_down
 import coursetrackermp.composeapp.generated.resources.sign_out
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
@@ -80,7 +82,11 @@ fun MainScreen(){
                         IconButton(
                             onClick = {}
                         ){
-                            Icon()
+                            Icon(
+                                painter = painterResource(Res.drawable.arrow_down),
+                                contentDescription = stringResource(Res.string.sign_out),
+                                tint = primaryColor
+                            )
                         }
                     }
                 }
