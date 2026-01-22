@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
+import coursetrackermp.composeapp.generated.resources.about
 import coursetrackermp.composeapp.generated.resources.sign_out
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -104,12 +105,25 @@ fun MainScreen(){
                                 Text("Joshua Omondi", fontWeight = FontWeight.Bold)
                             },
                             leadingIcon = {
-
                             }
                         )
+                        Spacer(Modifier.height(24 .dp))
                         HorizontalDivider(color = primaryColor, modifier = Modifier.height(8 .dp))
                         DropdownMenuItem(
-                            onClick = {},
+                            onClick = {expanded=false},
+                            text = {
+                                Text(stringResource(Res.string.about), fontSize = 12 .sp)
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    painter = painterResource(Res.drawable.about),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18 .dp)
+                                )
+                            }
+                        )
+                        DropdownMenuItem(
+                            onClick = {expanded=false},
                             text = {
                                 Text(stringResource(Res.string.sign_out), fontSize = 12 .sp)
                             },
