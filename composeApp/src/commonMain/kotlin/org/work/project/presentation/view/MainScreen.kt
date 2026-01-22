@@ -74,7 +74,7 @@ fun MainScreen(){
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Box(
-                            modifier = Modifier.size(50 .dp).padding(8 .dp).background(
+                            modifier = Modifier.size(60 .dp).padding(8 .dp).background(
                                 color = secondaryColor,
                                 shape = RoundedCornerShape(8 .dp)
                             ),
@@ -86,23 +86,23 @@ fun MainScreen(){
                                 textAlign = TextAlign.Center
                             )
                         }
-                        Column {
-                            Text(
-                                text = "Joshua"
-                            )
-                            Text(
-                                text = "Omondi"
-                            )
-                        }
-                        IconButton(
-                            onClick = {}
-                        ){
-                            Icon(
-                                painter = painterResource(Res.drawable.arrow_down),
-                                contentDescription = stringResource(Res.string.sign_out),
-                                tint = primaryColor
-                            )
-                        }
+//                        Column {
+//                            Text(
+//                                text = "Joshua"
+//                            )
+//                            Text(
+//                                text = "Omondi"
+//                            )
+//                        }
+//                        IconButton(
+//                            onClick = {}
+//                        ){
+//                            Icon(
+//                                painter = painterResource(Res.drawable.arrow_down),
+//                                contentDescription = stringResource(Res.string.sign_out),
+//                                tint = primaryColor
+//                            )
+//                        }
                     }
                 }
             )
