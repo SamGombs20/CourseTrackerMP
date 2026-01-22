@@ -51,8 +51,8 @@ fun MainScreen(){
 
                         },
                         colors = ButtonDefaults.textButtonColors(
-                            containerColor = Color.White,
-                            contentColor = secondaryColor
+                            containerColor = primaryColor,
+                            contentColor = Color.White
                         ),
                         shape = RoundedCornerShape(20 .dp)
                     ){
