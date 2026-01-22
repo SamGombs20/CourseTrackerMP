@@ -1,13 +1,17 @@
 package org.work.project.presentation.view
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -46,20 +50,38 @@ fun MainScreen(){
                     titleContentColor = primaryColor
                 ),
                 actions = {
-                    TextButton(
-                        onClick = {
-
-                        },
-                        colors = ButtonDefaults.textButtonColors(
-                            containerColor = primaryColor,
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(20 .dp)
-                    ){
-                        Text(
-                            text = stringResource(Res.string.sign_out),
-                            modifier = Modifier.padding(vertical = (2).dp, horizontal = 8 .dp)
-                        )
+//                    TextButton(
+//                        onClick = {
+//
+//                        },
+//                        colors = ButtonDefaults.textButtonColors(
+//                            containerColor = primaryColor,
+//                            contentColor = Color.White
+//                        ),
+//                        shape = RoundedCornerShape(20 .dp)
+//                    ){
+//                        Text(
+//                            text = stringResource(Res.string.sign_out),
+//                            modifier = Modifier.padding(vertical = (2).dp, horizontal = 8 .dp)
+//                        )
+//                    }
+                    Row {
+                        Box(
+                            modifier = Modifier.padding(8 .dp).background(
+                                color = secondaryColor,
+                                shape = CircleShape
+                            )
+                        ){
+                            Text(
+                                text = "J",
+                                color = Color.White
+                            )
+                        }
+                        IconButton(
+                            onClick = {}
+                        ){
+                            Icon()
+                        }
                     }
                 }
             )
