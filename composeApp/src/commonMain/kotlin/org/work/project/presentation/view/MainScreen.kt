@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -15,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.sign_out
 import org.jetbrains.compose.resources.painterResource
@@ -93,20 +96,32 @@ fun MainScreen(){
                         containerColor = Color.White,
                         modifier = Modifier.padding(
                             8 .dp
-                        )
+                        ).width(250 .dp)
                     ){
                         DropdownMenuItem(
                             onClick = {},
                             text = {
-                                Text(stringResource(Res.string.sign_out))
+                                Text("Joshua Omondi", fontWeight = FontWeight.Bold)
+                            },
+                            leadingIcon = {
+
+                            }
+                        )
+                        HorizontalDivider(color = primaryColor, modifier = Modifier.height(8 .dp))
+                        DropdownMenuItem(
+                            onClick = {},
+                            text = {
+                                Text(stringResource(Res.string.sign_out), fontSize = 12 .sp)
                             },
                             leadingIcon = {
                                 Icon(
                                     painter = painterResource(Res.drawable.sign_out),
-                                    contentDescription = null
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18 .dp)
                                 )
                             }
                         )
+
 
                     }
                 }
