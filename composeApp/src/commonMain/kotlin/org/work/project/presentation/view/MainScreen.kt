@@ -37,14 +37,13 @@ fun MainScreen(){
                             color = secondaryColor
                         )
                         Text(
-                            text = "Tracker",
-                            color = Color.White
+                            text = "Tracker"
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = primaryColor,
-                    titleContentColor = Color.White
+                    containerColor = Color.White,
+                    titleContentColor = primaryColor
                 ),
                 actions = {
                     TextButton(
