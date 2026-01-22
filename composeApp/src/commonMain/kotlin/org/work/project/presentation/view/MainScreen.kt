@@ -1,6 +1,7 @@
 package org.work.project.presentation.view
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,18 +12,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coursetrackermp.composeapp.generated.resources.Res
+import coursetrackermp.composeapp.generated.resources.sign_out
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
@@ -30,7 +42,7 @@ import org.work.project.presentation.ui.secondaryColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(){
-
+    var expanded by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -62,6 +74,8 @@ fun MainScreen(){
                             modifier = Modifier.size(55 .dp).padding(8 .dp).background(
                                 color = secondaryColor,
                                 shape = CircleShape
+                            ).clickable(
+                                true, onClick = {expanded=!expanded}
                             ),
                             contentAlignment = Alignment.Center
                         ){
@@ -73,7 +87,26 @@ fun MainScreen(){
                         }
 //
                     }
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = {expanded=false}
+                    ){
+                        DropdownMenuItem(
+                            onClick = {},
+                            text = {
+                                Text(stringResource(Res.string.sign_out))
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    painter = painterResource(Res.drawable.sign_out),
+                                    contentDescription = null
+                                )
+                            }
+                        )
+
+                    }
                 }
+
             )
         },
         content = { innerPadding->
