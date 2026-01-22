@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -99,17 +100,19 @@ fun MainScreen(){
                             8 .dp
                         ).width(250 .dp)
                     ){
-                        DropdownMenuItem(
-                            onClick = {},
-                            text = {
-                                Text("Joshua Omondi", fontWeight = FontWeight.Bold)
-                            },
-                            leadingIcon = {
-                            }
-                        )
+//                        DropdownMenuItem(
+//                            onClick = {},
+//                            text = {
+//
+//                            },
+//                            leadingIcon = {
+//                            }
+//                        )
+                        Text("Joshua Omondi", fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                         Spacer(Modifier.height(24 .dp))
                         HorizontalDivider(color = primaryColor, modifier = Modifier.height(8 .dp))
                         DropdownMenuItem(
+                            contentPadding = PaddingValues(start = 2 .dp),
                             onClick = {expanded=false},
                             text = {
                                 Text(stringResource(Res.string.about), fontSize = 12 .sp)
@@ -123,6 +126,7 @@ fun MainScreen(){
                             }
                         )
                         DropdownMenuItem(
+                            contentPadding = PaddingValues(start = 2 .dp),
                             onClick = {expanded=false},
                             text = {
                                 Text(stringResource(Res.string.sign_out), fontSize = 12 .sp)
