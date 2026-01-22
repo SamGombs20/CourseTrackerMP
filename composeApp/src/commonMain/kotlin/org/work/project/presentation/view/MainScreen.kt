@@ -70,7 +70,9 @@ fun MainScreen(){
 //                            modifier = Modifier.padding(vertical = (2).dp, horizontal = 8 .dp)
 //                        )
 //                    }
-                    Row {
+                    Row (
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
                         Box(
                             modifier = Modifier.size(50 .dp).padding(8 .dp).background(
                                 color = secondaryColor,
