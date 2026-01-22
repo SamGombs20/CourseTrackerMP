@@ -8,14 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -24,11 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coursetrackermp.composeapp.generated.resources.Res
-import coursetrackermp.composeapp.generated.resources.arrow_down
-import coursetrackermp.composeapp.generated.resources.sign_out
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
+
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 
@@ -55,28 +46,14 @@ fun MainScreen(){
                     titleContentColor = primaryColor
                 ),
                 actions = {
-//                    TextButton(
-//                        onClick = {
 //
-//                        },
-//                        colors = ButtonDefaults.textButtonColors(
-//                            containerColor = primaryColor,
-//                            contentColor = Color.White
-//                        ),
-//                        shape = RoundedCornerShape(20 .dp)
-//                    ){
-//                        Text(
-//                            text = stringResource(Res.string.sign_out),
-//                            modifier = Modifier.padding(vertical = (2).dp, horizontal = 8 .dp)
-//                        )
-//                    }
                     Row (
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Box(
-                            modifier = Modifier.size(60 .dp).padding(8 .dp).background(
+                            modifier = Modifier.size(55 .dp).padding(8 .dp).background(
                                 color = secondaryColor,
-                                shape = RoundedCornerShape(8 .dp)
+                                shape = CircleShape
                             ),
                             contentAlignment = Alignment.Center
                         ){
@@ -86,23 +63,7 @@ fun MainScreen(){
                                 textAlign = TextAlign.Center
                             )
                         }
-//                        Column {
-//                            Text(
-//                                text = "Joshua"
-//                            )
-//                            Text(
-//                                text = "Omondi"
-//                            )
-//                        }
-//                        IconButton(
-//                            onClick = {}
-//                        ){
-//                            Icon(
-//                                painter = painterResource(Res.drawable.arrow_down),
-//                                contentDescription = stringResource(Res.string.sign_out),
-//                                tint = primaryColor
-//                            )
-//                        }
+//
                     }
                 }
             )
