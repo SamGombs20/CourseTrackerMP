@@ -89,7 +89,11 @@ fun MainScreen(){
                     }
                     DropdownMenu(
                         expanded = expanded,
-                        onDismissRequest = {expanded=false}
+                        onDismissRequest = {expanded=false},
+                        containerColor = Color.White,
+                        modifier = Modifier.padding(
+                            8 .dp
+                        )
                     ){
                         DropdownMenuItem(
                             onClick = {},
