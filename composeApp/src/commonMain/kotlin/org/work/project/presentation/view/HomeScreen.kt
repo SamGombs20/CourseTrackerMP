@@ -50,8 +50,9 @@ fun HomeScreen(){
             contentAlignment = Alignment.CenterStart
         ){
             Row(
-                modifier = Modifier.padding(16 .dp),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.padding(16 .dp).fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -92,15 +93,19 @@ fun HomeScreen(){
                     colors = ButtonDefaults.buttonColors(
                         containerColor = primaryColor,
                         contentColor = Color.White
-                    )
+                    ),
+                    shape = RoundedCornerShape(8 .dp)
                 ){
-                    Row {
-                        Text(
-                            text = stringResource(Res.string.add_course)
-                        )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(16 .dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Icon(
                             painter = painterResource(Res.drawable.add),
                             contentDescription = null
+                        )
+                        Text(
+                            text = stringResource(Res.string.add_course)
                         )
                     }
                 }
