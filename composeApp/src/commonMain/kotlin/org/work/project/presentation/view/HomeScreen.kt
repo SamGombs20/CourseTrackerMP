@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -94,7 +95,8 @@ fun HomeScreen(){
                         containerColor = primaryColor,
                         contentColor = Color.White
                     ),
-                    shape = RoundedCornerShape(8 .dp)
+                    shape = RoundedCornerShape(12 .dp),
+                    contentPadding = PaddingValues(horizontal = 12 .dp)
                 ){
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(16 .dp),
