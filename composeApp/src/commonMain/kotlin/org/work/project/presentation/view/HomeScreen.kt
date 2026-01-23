@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.active_courses
 import coursetrackermp.composeapp.generated.resources.course
@@ -33,7 +34,7 @@ import org.work.project.presentation.ui.secondaryColor
 fun HomeScreen(){
     Column {
         Box(
-            modifier = Modifier.padding(16 .dp).fillMaxWidth().height(100 .dp).background(
+            modifier = Modifier.padding(16 .dp).fillMaxWidth().height(120 .dp).background(
                 brush = Brush.horizontalGradient(
                     colors = listOf(
                         secondaryColor, lightSecondaryColor
@@ -43,14 +44,15 @@ fun HomeScreen(){
             )
         ){
             Row(
-                modifier = Modifier.padding(16 .dp)
+                modifier = Modifier.padding(16 .dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8 .dp)
+                    horizontalArrangement = Arrangement.spacedBy(16 .dp)
                 ) {
                     Box(
-                        modifier = Modifier.size(48 .dp).background(
+                        modifier = Modifier.size(50 .dp).background(
                             color = primaryColor,
                             shape = CircleShape
                         ),
@@ -65,11 +67,13 @@ fun HomeScreen(){
                     Column {
                         Text(
                             text = stringResource(Res.string.active_courses),
-                            color = Color.White
+                            color = Color.White,
+                            fontSize = 14 .sp
                         )
                         Text(
                             text = "16",
-                            color = Color.White
+                            color = Color.White,
+                            fontSize = 22 .sp
                         )
                     }
                 }
