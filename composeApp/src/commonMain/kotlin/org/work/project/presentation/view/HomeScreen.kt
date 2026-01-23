@@ -41,7 +41,8 @@ fun HomeScreen(){
                     )
                 ),
                 shape = RoundedCornerShape(16 .dp)
-            )
+            ),
+            contentAlignment = Alignment.CenterStart
         ){
             Row(
                 modifier = Modifier.padding(16 .dp),
