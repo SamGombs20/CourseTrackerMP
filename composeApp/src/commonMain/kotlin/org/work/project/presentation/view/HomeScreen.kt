@@ -35,10 +35,11 @@ fun HomeScreen(){
                     horizontalArrangement = Arrangement.spacedBy(8 .dp)
                 ) {
                     Box(
-                        modifier = Modifier.size(56 .dp).background(
+                        modifier = Modifier.size(48 .dp).background(
                             color = primaryColor,
                             shape = CircleShape
-                        )
+                        ),
+                        contentAlignment = Alignment.Center
                     ){
                         Icon(
                             painter = painterResource(Res.drawable.course),
