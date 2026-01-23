@@ -62,7 +62,7 @@ fun MainScreen(){
                         )
                         Text(
                             text = "Josh",
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.SemiBold
                         )
                     }
                 },

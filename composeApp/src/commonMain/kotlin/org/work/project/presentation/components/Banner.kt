@@ -38,7 +38,7 @@ import org.work.project.presentation.ui.secondaryColor
 @Composable
 fun Banner(){
     Box(
-        modifier = Modifier.padding(16 .dp).fillMaxWidth().height(120 .dp).background(
+        modifier = Modifier.fillMaxWidth().height(120 .dp).background(
             brush = Brush.horizontalGradient(
                 colors = listOf(
                     secondaryColor, lightSecondaryColor
@@ -83,7 +83,7 @@ fun Banner(){
                     Text(
                         text = "16",
                         color = Color.White,
-                        fontSize = 22 .sp
+                        fontSize = 26 .sp
                     )
                 }
             }
@@ -93,8 +93,8 @@ fun Banner(){
                     containerColor = primaryColor,
                     contentColor = Color.White
                 ),
-                shape = RoundedCornerShape(12 .dp),
-                contentPadding = PaddingValues(horizontal = 12 .dp)
+                shape = RoundedCornerShape(16 .dp),
+                contentPadding = PaddingValues(horizontal = 16 .dp)
             ){
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(16 .dp),
