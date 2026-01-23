@@ -1,14 +1,26 @@
 package org.work.project.presentation.view
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.active_courses
+import coursetrackermp.composeapp.generated.resources.course
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
@@ -18,9 +30,23 @@ fun HomeScreen(){
 
         ){
             Row {
-                Row {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8 .dp)
+                ) {
+                    Box(
+                        modifier = Modifier.size(56 .dp).background(
+                            color = primaryColor,
+                            shape = CircleShape
+                        )
+                    ){
+                        Icon(
+                            painter = painterResource(Res.drawable.course),
+                            contentDescription = null,
+                            tint = Color.White
+                        )
+                    }
                     Column {
-
                         Text(
                             text = stringResource(Res.string.active_courses)
                         )
