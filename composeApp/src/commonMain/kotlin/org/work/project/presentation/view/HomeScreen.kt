@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import coursetrackermp.composeapp.generated.resources.active_courses
 import coursetrackermp.composeapp.generated.resources.course
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.presentation.ui.lightSecondaryColor
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 
@@ -32,14 +34,17 @@ fun HomeScreen(){
     Column {
         Box(
             modifier = Modifier.padding(16 .dp).fillMaxWidth().height(100 .dp).background(
-                brush = Brush.sweepGradient(
+                brush = Brush.horizontalGradient(
                     colors = listOf(
-                        secondaryColor, Color.White
+                        secondaryColor, lightSecondaryColor
                     )
-                )
+                ),
+                shape = RoundedCornerShape(16 .dp)
             )
         ){
-            Row {
+            Row(
+                modifier = Modifier.padding(16 .dp)
+            ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8 .dp)
@@ -59,10 +64,12 @@ fun HomeScreen(){
                     }
                     Column {
                         Text(
-                            text = stringResource(Res.string.active_courses)
+                            text = stringResource(Res.string.active_courses),
+                            color = Color.White
                         )
                         Text(
-                            text = "16"
+                            text = "16",
+                            color = Color.White
                         )
                     }
                 }
