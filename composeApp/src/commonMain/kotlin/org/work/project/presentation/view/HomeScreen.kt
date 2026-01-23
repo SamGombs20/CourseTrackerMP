@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,9 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.active_courses
+import coursetrackermp.composeapp.generated.resources.add
+import coursetrackermp.composeapp.generated.resources.add_course
 import coursetrackermp.composeapp.generated.resources.course
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.presentation.ui.lightPrimaryColor
 import org.work.project.presentation.ui.lightSecondaryColor
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
@@ -54,7 +59,11 @@ fun HomeScreen(){
                 ) {
                     Box(
                         modifier = Modifier.size(50 .dp).background(
-                            color = primaryColor,
+                            brush = Brush.linearGradient(
+                                colors = listOf(
+                                    primaryColor, lightPrimaryColor
+                                )
+                            ),
                             shape = CircleShape
                         ),
                         contentAlignment = Alignment.Center
@@ -75,6 +84,23 @@ fun HomeScreen(){
                             text = "16",
                             color = Color.White,
                             fontSize = 22 .sp
+                        )
+                    }
+                }
+                Button(
+                    onClick = {},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = primaryColor,
+                        contentColor = Color.White
+                    )
+                ){
+                    Row {
+                        Text(
+                            text = stringResource(Res.string.add_course)
+                        )
+                        Icon(
+                            painter = painterResource(Res.drawable.add),
+                            contentDescription = null
                         )
                     }
                 }

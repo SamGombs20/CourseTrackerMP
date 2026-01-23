@@ -18,4 +18,5 @@
     <string name="sign_out">Sign Out</string>
     <string name="about">About</string>
     <string name="active_courses">Your Courses</string>
+    <string name="add_course">Add Course</string>
 </resources>
