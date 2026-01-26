@@ -3,6 +3,8 @@ package org.work.project.presentation.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,16 +16,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 import coursetrackermp.composeapp.generated.resources.Res
+import coursetrackermp.composeapp.generated.resources.arrow_down
+import coursetrackermp.composeapp.generated.resources.book
 import coursetrackermp.composeapp.generated.resources.completed
 import coursetrackermp.composeapp.generated.resources.my_courses
 import coursetrackermp.composeapp.generated.resources.pending
 import coursetrackermp.composeapp.generated.resources.progress
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Category
 
 @Composable
 fun MainHeader(){
-    var selectedOption by remember{ mutableStateOf("") }
+    var selectedOption by remember{ mutableStateOf(Category(Res.drawable.book, "All")) }
     val selectionOptions = listOf<Category>(
         Category(
             Res.drawable.pending, "Not Started"
@@ -46,7 +51,21 @@ fun MainHeader(){
             fontWeight = FontWeight.SemiBold
         )
         Row {
-
+            Icon(
+                painter = painterResource(selectedOption.icon),
+                contentDescription = null
+            )
+            Text(
+                text = selectedOption.name
+            )
+            IconButton(
+                onClick = {}
+            ){
+                Icon(
+                    painter = painterResource(Res.drawable.arrow_down),
+                    contentDescription = null
+                )
+            }
         }
     }
 }
