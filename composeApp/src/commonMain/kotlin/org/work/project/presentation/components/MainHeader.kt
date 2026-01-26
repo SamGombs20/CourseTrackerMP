@@ -82,7 +82,9 @@ fun MainHeader(){
                 text = selectedOption.name
             )
             IconButton(
-                onClick = {},
+                onClick = {
+                    isExpanded = !isExpanded
+                },
 
             ){
                 Icon(
