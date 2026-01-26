@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.arrow_down
+import coursetrackermp.composeapp.generated.resources.arrow_up
 import coursetrackermp.composeapp.generated.resources.book
 import coursetrackermp.composeapp.generated.resources.completed
 import coursetrackermp.composeapp.generated.resources.my_courses
@@ -51,6 +52,9 @@ fun MainHeader(){
         Category(
             Res.drawable.completed, "Completed"
         ),
+        Category(
+            Res.drawable.book,"All"
+        )
 
     )
     var isExpanded by remember { mutableStateOf(false) }
@@ -69,17 +73,18 @@ fun MainHeader(){
                 8 .dp,
                 RoundedCornerShape(24 .dp)
             ).background(Color.White),
-            horizontalArrangement = Arrangement.spacedBy(8 .dp),
+            horizontalArrangement = Arrangement.spacedBy(6 .dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 painter = painterResource(selectedOption.icon),
                 contentDescription = null,
-                modifier = Modifier.padding(start = 16 .dp).size(18 .dp)
+                modifier = Modifier.padding(start = 16 .dp).size(20 .dp)
             )
             Spacer(Modifier.width(8 .dp))
             Text(
-                text = selectedOption.name
+                text = selectedOption.name,
+                fontSize = 12 .sp
             )
             IconButton(
                 onClick = {
@@ -88,25 +93,33 @@ fun MainHeader(){
 
             ){
                 Icon(
-                    painter = painterResource(Res.drawable.arrow_down),
+                    painter = painterResource(if (isExpanded) Res.drawable.arrow_up else Res.drawable.arrow_down),
                     contentDescription = null,
-                    modifier = Modifier.size(18 .dp)
+                    modifier = Modifier.padding(4 .dp).size(18 .dp)
                 )
             }
             DropdownMenu(
                 expanded = isExpanded,
-                onDismissRequest = {isExpanded= !isExpanded}
+                onDismissRequest = {isExpanded= !isExpanded},
+                containerColor = Color.White,
+                modifier = Modifier.padding(
+                    8 .dp
+                ).width(150 .dp)
             ){
                 selectionOptions.forEach { option->
                     DropdownMenuItem(
-                        text = {Text(option.name)},
+                        text = {
+                            Text(option.name, fontSize = 12 .sp)
+                               },
                         onClick = {
                             selectedOption= option
+                            isExpanded = false
                         },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(option.icon),
-                                contentDescription = option.name
+                                contentDescription = option.name,
+                                modifier = Modifier.size(18 .dp)
                             )
                         }
                     )
