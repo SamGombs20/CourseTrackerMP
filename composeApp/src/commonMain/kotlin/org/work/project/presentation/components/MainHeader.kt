@@ -14,7 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 import coursetrackermp.composeapp.generated.resources.Res
+import coursetrackermp.composeapp.generated.resources.completed
 import coursetrackermp.composeapp.generated.resources.my_courses
+import coursetrackermp.composeapp.generated.resources.pending
+import coursetrackermp.composeapp.generated.resources.progress
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Category
 
@@ -22,6 +25,15 @@ import org.work.project.model.Category
 fun MainHeader(){
     var selectedOption by remember{ mutableStateOf("") }
     val selectionOptions = listOf<Category>(
+        Category(
+            Res.drawable.pending, "Not Started"
+        ),
+        Category(
+            Res.drawable.progress, "In Progress"
+        ),
+        Category(
+            Res.drawable.completed, "Completed"
+        ),
 
     )
     Row (
