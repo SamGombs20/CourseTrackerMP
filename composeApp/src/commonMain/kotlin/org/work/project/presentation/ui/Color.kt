@@ -9,6 +9,7 @@ val lightSecondaryColor =Color(0xFFF7B5C0)
 
 val inProgressLight = Color(0xFFD2CCFC)
 val inProgress = Color.Blue
+val lightGray = Color(0xFFEEEEEE)
 val notStartedLight = Color(0xFFED46622A)
 val completedLight = Color(0xFF7FBF7F)
 val completed = Color.Green

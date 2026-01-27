@@ -27,6 +27,7 @@ import coursetrackermp.composeapp.generated.resources.progress
 import org.jetbrains.compose.resources.painterResource
 import org.work.project.presentation.ui.inProgress
 import org.work.project.presentation.ui.inProgressLight
+import org.work.project.presentation.ui.lightGray
 import org.work.project.presentation.ui.primaryColor
 
 @Composable
@@ -55,6 +56,16 @@ fun Course(){
         Column(
             modifier = Modifier.padding(6 .dp)
         ) {
+            Box(
+                modifier = Modifier
+                    .background(lightGray, RoundedCornerShape(16 .dp))
+                    .padding(8 .dp, 4 .dp)
+            ){
+                Text(
+                    text = "Android development",
+                    fontSize = 11 .sp
+                )
+            }
             Text(
                 text = "Learnt to develop android mobile apps with jetpack compose..",
                 fontSize = 14 .sp
