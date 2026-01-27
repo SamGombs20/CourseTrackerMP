@@ -32,6 +32,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.active_courses
 import coursetrackermp.composeapp.generated.resources.add
@@ -39,14 +41,15 @@ import coursetrackermp.composeapp.generated.resources.add_course
 import coursetrackermp.composeapp.generated.resources.course
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.work.project.model.courses
 import org.work.project.presentation.ui.lightPrimaryColor
 import org.work.project.presentation.ui.lightSecondaryColor
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
+import org.work.project.presentation.viewmodel.CourseViewModel
 
 @Composable
-fun Banner(){
+fun Banner(courseViewModel: CourseViewModel= viewModel()){
+    val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier.fillMaxWidth().height(120 .dp).background(

@@ -72,7 +72,7 @@ fun Course(course: Course){
             }
             Spacer(Modifier.height(6 .dp))
             Text(
-                text = course.description.slice(0..50)+"...",
+                text = course.description.take(51)+"...",
                 fontSize = 13 .sp
             )
             Spacer(Modifier.height(8 .dp))
