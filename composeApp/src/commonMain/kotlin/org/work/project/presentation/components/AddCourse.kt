@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
+import coursetrackermp.composeapp.generated.resources.calendar
 import coursetrackermp.composeapp.generated.resources.category
 import coursetrackermp.composeapp.generated.resources.close
 import coursetrackermp.composeapp.generated.resources.description
@@ -49,7 +50,8 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
     var startDate by remember { mutableStateOf("") }
     var endDate by remember { mutableStateOf("")}
     var rating by remember { mutableStateOf("")}
-
+    var showStartDate by remember { mutableStateOf(false) }
+    var showEndDate by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -96,12 +98,14 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             onChange = {
                 startDate = it
             },
+            readOnly = true,
             trailingIcon = {
                 IconButton(
                     onClick = {}
                 ){
                     Icon(
-                        painter = painterResource(Res.drawable)
+                        painter = painterResource(Res.drawable.calendar),
+                        contentDescription = null
                     )
                 }
             },
@@ -111,8 +115,19 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
 
         CustomTextField(
             value = endDate,
+            readOnly = true,
             onChange = {
                 endDate = it
+            },
+            trailingIcon = {
+                IconButton(
+                    onClick = {}
+                ){
+                    Icon(
+                        painter = painterResource(Res.drawable.calendar),
+                        contentDescription = null
+                    )
+                }
             },
             label = stringResource(Res.string.end_date)
         )
@@ -170,6 +185,22 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                     )
                 }
             }
+        }
+        if (showStartDate){
+            DatePickerModal(
+                onDateSelected = {
+
+                },
+                onDismiss = {showStartDate=false}
+            )
+        }
+        if(showEndDate){
+            DatePickerModal(
+                onDateSelected = {},
+                onDismiss = {
+                    showEndDate = false
+                }
+            )
         }
     }
 }
