@@ -10,7 +10,8 @@ import org.work.project.model.courses
 @Composable
 fun CourseList(){
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 180 .dp)
+        columns = GridCells.Adaptive(minSize = 180 .dp),
+
     ){
         items(courses){ course->
             Course(course)

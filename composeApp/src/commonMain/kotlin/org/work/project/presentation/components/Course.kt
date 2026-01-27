@@ -66,16 +66,16 @@ fun Course(course: Course){
                     .padding(8 .dp, 2 .dp)
             ){
                 Text(
-                    text = course.description,
+                    text = course.category,
                     fontSize = 11 .sp
                 )
             }
             Spacer(Modifier.height(6 .dp))
             Text(
-                text = course.description.slice(0..40)+"...",
+                text = course.description.slice(0..50)+"...",
                 fontSize = 13 .sp
             )
-            Spacer(Modifier.height(16 .dp))
+            Spacer(Modifier.height(8 .dp))
             Row (
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(6 .dp),

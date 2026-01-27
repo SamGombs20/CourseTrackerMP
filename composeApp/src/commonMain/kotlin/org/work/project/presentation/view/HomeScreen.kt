@@ -4,13 +4,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.work.project.model.courses
 import org.work.project.presentation.components.Banner
+import org.work.project.presentation.components.Course
 import org.work.project.presentation.components.CourseList
 import org.work.project.presentation.components.MainHeader
 import org.work.project.presentation.ui.primaryColor
@@ -18,16 +24,31 @@ import org.work.project.presentation.ui.primaryColor
 
 @Composable
 fun HomeScreen(){
-    val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier.padding(16 .dp).verticalScroll(scrollState)
+
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(200 .dp),
+        modifier = Modifier.padding(16 .dp)
     ) {
-        Banner()
-        Spacer(Modifier.height(16 .dp))
-        MainHeader()
-        Spacer(Modifier.height(24 .dp))
-        HorizontalDivider(color = primaryColor)
-        Spacer(Modifier.height(8 .dp))
-        CourseList()
+        item(span = { GridItemSpan(maxLineSpan) }) {
+            Column {
+                Banner()
+                Spacer(Modifier.height(16 .dp))
+            }
+        }
+        item(span = {GridItemSpan(maxLineSpan)}) {
+            Column {
+                MainHeader()
+                Spacer(Modifier.height(24 .dp))
+            }
+        }
+        item(span = {GridItemSpan(maxLineSpan)}) {
+            Column {
+                HorizontalDivider(color = primaryColor)
+                Spacer(Modifier.height(8 .dp))
+            }
+        }
+        items(courses){ course->
+            Course(course)
+        }
     }
 }
