@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.work.project.presentation.components.Banner
-import org.work.project.presentation.components.Course
+import org.work.project.presentation.components.CourseList
 import org.work.project.presentation.components.MainHeader
 import org.work.project.presentation.ui.primaryColor
 
@@ -28,7 +28,6 @@ fun HomeScreen(){
         Spacer(Modifier.height(24 .dp))
         HorizontalDivider(color = primaryColor)
         Spacer(Modifier.height(8 .dp))
-        Course()
-        Course()
+        CourseList()
     }
 }

@@ -25,15 +25,19 @@ import androidx.compose.ui.unit.sp
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.progress
 import org.jetbrains.compose.resources.painterResource
+import org.work.project.model.Course
 import org.work.project.presentation.ui.inProgress
 import org.work.project.presentation.ui.inProgressLight
 import org.work.project.presentation.ui.lightGray
 import org.work.project.presentation.ui.primaryColor
+import org.work.project.utils.getStatusBackground
+import org.work.project.utils.getStatusColor
+import org.work.project.utils.getStatusIcon
 
 @Composable
-fun Course(){
+fun Course(course: Course){
     Column (
-        modifier = Modifier.padding(8 .dp).width(250 .dp).shadow(
+        modifier = Modifier.padding(8 .dp).width(200 .dp).shadow(
             elevation = 10 .dp,
             shape = RoundedCornerShape(16 .dp)
         ).background(Color.White)
@@ -46,7 +50,7 @@ fun Course(){
             contentAlignment = Alignment.CenterStart
         ){
             Text(
-                text = "Introduction to Android Development",
+                text = course.name,
                 fontSize = 18 .sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
@@ -59,34 +63,35 @@ fun Course(){
             Box(
                 modifier = Modifier
                     .background(lightGray, RoundedCornerShape(16 .dp))
-                    .padding(8 .dp, 4 .dp)
+                    .padding(8 .dp, 2 .dp)
             ){
                 Text(
-                    text = "Android development",
+                    text = course.description,
                     fontSize = 11 .sp
                 )
             }
+            Spacer(Modifier.height(6 .dp))
             Text(
-                text = "Learnt to develop android mobile apps with jetpack compose..",
-                fontSize = 14 .sp
+                text = course.description.slice(0..40)+"...",
+                fontSize = 13 .sp
             )
             Spacer(Modifier.height(16 .dp))
             Row (
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(6 .dp),
                 modifier = Modifier.background(
-                    inProgressLight, RoundedCornerShape(16 .dp)
+                    getStatusBackground(course.status), RoundedCornerShape(16 .dp)
                 ).padding(4 .dp, 0 .dp).align(Alignment.End)
             ) {
                 Icon(
-                    painter = painterResource(Res.drawable.progress),
+                    painter = painterResource(getStatusIcon(course.status)),
                     contentDescription = null,
-                    tint = inProgress,
+                    tint = getStatusColor(course.status),
                     modifier = Modifier.size(12 .dp)
                 )
                 Text(
-                    text = "In Progress",
-                    color = inProgress,
+                    text = course.status,
+                    color = getStatusColor(course.status),
                     fontSize = 10 .sp
                 )
             }
