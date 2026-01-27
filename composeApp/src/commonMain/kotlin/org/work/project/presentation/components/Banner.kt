@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -140,13 +139,11 @@ fun Banner(){
                     ) {
                         Text(
                             text = stringResource(Res.string.add_course),
-                            fontSize = 18 .sp,
+                            fontSize = 22 .sp,
                             fontWeight = FontWeight.SemiBold,
-                            textAlign = TextAlign.Center,
                             modifier = Modifier.padding(16 .dp)
                         )
-                        LazyColumn (
-                        ) {
+                        LazyColumn {
                             item {
                                 AddCourse()
                             }
