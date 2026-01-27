@@ -18,7 +18,9 @@ fun CustomTextField(
     value: String,
     onChange:(String)-> Unit,
     label: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    readOnly: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null
 ){
     Column {
         OutlinedTextField(
@@ -28,9 +30,10 @@ fun CustomTextField(
             textStyle = TextStyle(
                 fontSize = 14 .sp
             ),
+            readOnly = readOnly,
             onValueChange = onChange,
             shape = RoundedCornerShape(16 .dp),
-
+            trailingIcon = trailingIcon
         )
     }
 }

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 
@@ -32,6 +34,7 @@ import coursetrackermp.composeapp.generated.resources.rating
 import coursetrackermp.composeapp.generated.resources.save
 import coursetrackermp.composeapp.generated.resources.start_date
 import coursetrackermp.composeapp.generated.resources.status
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Course
 import org.work.project.presentation.ui.secondaryColor
@@ -92,6 +95,15 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             value = startDate,
             onChange = {
                 startDate = it
+            },
+            trailingIcon = {
+                IconButton(
+                    onClick = {}
+                ){
+                    Icon(
+                        painter = painterResource(Res.drawable)
+                    )
+                }
             },
             label = stringResource(Res.string.start_date)
         )
