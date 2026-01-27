@@ -141,6 +141,7 @@ fun Banner(){
                             text = stringResource(Res.string.add_course),
                             fontSize = 22 .sp,
                             fontWeight = FontWeight.SemiBold,
+                            color = secondaryColor,
                             modifier = Modifier.padding(16 .dp)
                         )
                         LazyColumn {
