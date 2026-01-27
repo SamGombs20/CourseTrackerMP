@@ -1,10 +1,14 @@
 package org.work.project.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 
@@ -15,7 +19,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.category
 import coursetrackermp.composeapp.generated.resources.close
@@ -27,9 +33,12 @@ import coursetrackermp.composeapp.generated.resources.save
 import coursetrackermp.composeapp.generated.resources.start_date
 import coursetrackermp.composeapp.generated.resources.status
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.model.Course
+import org.work.project.presentation.ui.secondaryColor
+import org.work.project.presentation.viewmodel.CourseViewModel
 
 @Composable
-fun AddCourse(){
+fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewModel()){
     var name by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -38,7 +47,10 @@ fun AddCourse(){
     var endDate by remember { mutableStateOf("")}
     var rating by remember { mutableStateOf("")}
 
-    Column {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         CustomTextField(
             value = name,
             onChange = {
@@ -102,23 +114,49 @@ fun AddCourse(){
             label = stringResource(Res.string.rating)
         )
         Spacer(Modifier.height(16.dp))
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            TextButton(
-                onClick = {}
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.BottomEnd
+        ){
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = stringResource(Res.string.save)
-                )
-            }
-            TextButton(
-                onClick = {}
-            ) {
-                Text(
-                    text = stringResource(Res.string.close)
-                )
+                TextButton(
+                    onClick = {
+                        onClose(true)
+                    }
+                ) {
+                    Text(
+                        text = stringResource(Res.string.close)
+                    )
+                }
+                TextButton(
+                    onClick = {
+                        courseViewModel.addCourse(
+                            Course(
+                                id = "c00",
+                                name,
+                                category,
+                                description,
+                                status,
+                                startDate,
+                                endDate,
+                                rating
+                            )
+                        )
+                        onClose(true)
+                    },
+                    colors = ButtonDefaults.textButtonColors(
+                        containerColor = secondaryColor,
+                        contentColor = Color.White
+                    ),
+                    contentPadding = PaddingValues( 4 .dp)
+                ) {
+                    Text(
+                        text = stringResource(Res.string.save)
+                    )
+                }
             }
         }
     }

@@ -146,7 +146,9 @@ fun Banner(){
                         )
                         LazyColumn {
                             item {
-                                AddCourse()
+                                AddCourse(onClose = {
+                                    showDialog = false
+                                })
                             }
                         }
                     }
