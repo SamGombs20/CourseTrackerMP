@@ -95,7 +95,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
         Spacer(Modifier.height(16.dp))
 
         CustomTextField(
-            value = convertMillisToDate(startDate),
+            value = if (startDate==null) "" else convertMillisToDate(startDate),
             readOnly = true,
             onChange = {},
             trailingIcon = {
@@ -115,7 +115,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
         Spacer(Modifier.height(16.dp))
 
         CustomTextField(
-            value = convertMillisToDate(endDate),
+            value = if (endDate==null) "" else convertMillisToDate(endDate),
             readOnly = true,
             onChange = {},
             trailingIcon = {

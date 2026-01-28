@@ -13,7 +13,7 @@ actual fun convertMillisToDate(millis: Long?): String {
             .withLocale(Locale.getDefault())
 
         val date = Instant
-            .ofEpochMilli(millis)
+            .ofEpochMilli(millis!!)
             .atZone(ZoneId.systemDefault())
 
         return formatter.format(date)

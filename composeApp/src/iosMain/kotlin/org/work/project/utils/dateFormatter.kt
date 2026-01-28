@@ -12,6 +12,6 @@ actual fun convertMillisToDate(millis: Long?): String {
         dateStyle = NSDateFormatterMediumStyle
         locale = NSLocale.currentLocale
     }
-    val date = NSDate.dateWithTimeIntervalSince1970(millis/1000.0)
+    val date = NSDate.dateWithTimeIntervalSince1970(millis!!/1000.0)
     return formatter.stringFromDate(date)
 }
