@@ -69,6 +69,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
     var categoryError by remember { mutableStateOf("") }
     var descriptionError by remember { mutableStateOf("") }
     var statusError by remember { mutableStateOf("") }
+    var startDateError by remember { mutableStateOf("") }
 
     fun validateInputs(): Boolean{
         var isValid = true
@@ -86,6 +87,10 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
         }
         if (status.isEmpty()){
             statusError = "Course status cannot be empty"
+            isValid = false
+        }
+        if (startDate==null){
+            startDateError = "Course start date cannot be empty"
             isValid = false
         }
         return isValid
@@ -179,6 +184,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             value = if (startDate==null) "" else convertMillisToDate(startDate),
             readOnly = true,
             onChange = {},
+            isError = startDateError.isNotEmpty(),
             trailingIcon = {
                 IconButton(
                     onClick = {
@@ -193,6 +199,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             },
             label = stringResource(Res.string.start_date)
         )
+        if(startDateError.isNotEmpty()){
+            ErrorText(startDateError)
+        }
         Spacer(Modifier.height(16.dp))
 
         CustomTextField(
