@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CustomTextField(
+    isError: Boolean =false,
     value: String,
     onChange:(String)-> Unit,
     label: String,
@@ -30,6 +31,7 @@ fun CustomTextField(
             textStyle = TextStyle(
                 fontSize = 14 .sp
             ),
+            isError = isError,
             readOnly = readOnly,
             onValueChange = onChange,
             shape = RoundedCornerShape(16 .dp),

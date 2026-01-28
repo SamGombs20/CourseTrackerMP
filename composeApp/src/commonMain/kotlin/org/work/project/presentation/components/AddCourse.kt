@@ -35,6 +35,7 @@ import coursetrackermp.composeapp.generated.resources.close
 import coursetrackermp.composeapp.generated.resources.description
 import coursetrackermp.composeapp.generated.resources.end_date
 import coursetrackermp.composeapp.generated.resources.name
+import coursetrackermp.composeapp.generated.resources.name_error
 import coursetrackermp.composeapp.generated.resources.rating
 import coursetrackermp.composeapp.generated.resources.save
 import coursetrackermp.composeapp.generated.resources.start_date
@@ -64,6 +65,31 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
     var rating by remember { mutableStateOf("")}
     var showStartDate by remember { mutableStateOf(false) }
     var showEndDate by remember { mutableStateOf(false) }
+    var nameError by remember { mutableStateOf("") }
+    var categoryError by remember { mutableStateOf("") }
+    var descriptionError by remember { mutableStateOf("") }
+    var statusError by remember { mutableStateOf("") }
+
+    fun validateInputs(): Boolean{
+        var isValid = true
+        if(name.isEmpty()){
+            nameError = "Course name cannot be empty"
+            isValid = false
+        }
+        if(category.isEmpty()){
+            categoryError = "Course category cannot be empty"
+            isValid = false
+        }
+        if (description.isEmpty()){
+            descriptionError = "Course description cannot be empty"
+            isValid = false
+        }
+        if (status.isEmpty()){
+            statusError = "Course status cannot be empty"
+            isValid = false
+        }
+        return isValid
+    }
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -72,7 +98,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             value = name,
             onChange = {
                 name = it
+                nameError=""
             },
+            isError = nameError.isNotEmpty(),
             label = stringResource(Res.string.name)
         )
         Spacer(Modifier.height(8.dp))
@@ -82,7 +110,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             value = category,
             onChange = {
                 category = it
+                categoryError =""
             },
+            isError = categoryError.isNotEmpty(),
             label = stringResource(Res.string.category)
         )
         Spacer(Modifier.height(8.dp))
@@ -91,7 +121,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             value = description,
             onChange = {
                 description = it
+                descriptionError=""
             },
+            isError = descriptionError.isNotEmpty(),
             label = stringResource(Res.string.description)
         )
         Spacer(Modifier.height(8.dp))
@@ -104,6 +136,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                 value = status,
                 onChange = {},
                 readOnly = true,
+                isError = statusError.isNotEmpty(),
                 modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
                 label = stringResource(Res.string.status)
             )
@@ -119,6 +152,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                         onClick = {
                             status = option
                             showStatusOptions = false
+                            statusError=""
                         }
                     )
                 }
@@ -195,19 +229,21 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                 }
                 TextButton(
                     onClick = {
-                        courseViewModel.addCourse(
-                            Course(
-                                id = "c00",
-                                name,
-                                category,
-                                description,
-                                status,
-                                convertMillisToDate(startDate),
-                                convertMillisToDate(endDate),
-                                rating
+                        if(validateInputs()){
+                            courseViewModel.addCourse(
+                                Course(
+                                    id = "c00",
+                                    name,
+                                    category,
+                                    description,
+                                    status,
+                                    convertMillisToDate(startDate),
+                                    convertMillisToDate(endDate),
+                                    rating
+                                )
                             )
-                        )
-                        onClose(true)
+                            onClose(true)
+                        }
                     },
                     colors = ButtonDefaults.textButtonColors(
                         containerColor = secondaryColor,
