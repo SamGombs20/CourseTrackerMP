@@ -101,7 +101,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             readOnly = true,
             trailingIcon = {
                 IconButton(
-                    onClick = {}
+                    onClick = {
+                        showStartDate =true
+                    }
                 ){
                     Icon(
                         painter = painterResource(Res.drawable.calendar),
@@ -121,7 +123,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             },
             trailingIcon = {
                 IconButton(
-                    onClick = {}
+                    onClick = {
+                        showEndDate = true
+                    }
                 ){
                     Icon(
                         painter = painterResource(Res.drawable.calendar),
