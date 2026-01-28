@@ -1,12 +1,14 @@
 package org.work.project.presentation.components
 
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -17,6 +19,10 @@ fun DatePickerModal(
     val datePickerState = rememberDatePickerState()
 
     DatePickerDialog(
+        colors = DatePickerDefaults.colors(
+            containerColor = Color.White,
+
+        ),
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = {
@@ -32,6 +38,8 @@ fun DatePickerModal(
             }
         }
     ) {
-        DatePicker(state = datePickerState)
+        DatePicker(state = datePickerState, colors = DatePickerDefaults.colors(
+            containerColor = Color.White
+        ))
     }
 }
