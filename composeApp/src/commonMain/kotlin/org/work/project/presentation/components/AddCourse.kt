@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
+import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 
@@ -40,22 +42,23 @@ import coursetrackermp.composeapp.generated.resources.status
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Course
-import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
 import org.work.project.utils.convertMillisToDate
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewModel()){
     var name by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-    var status by remember { mutableStateOf("Not Started")}
+    var status by remember { mutableStateOf("")}
     val statusOptions = listOf(
         "Not Started",
         "In Progress",
         "Completed"
     )
+    var showStatusOptions by remember { mutableStateOf(false) }
     var startDate by remember { mutableStateOf<Long?>(null) }
     var endDate by remember { mutableStateOf<Long?>(null)}
     var rating by remember { mutableStateOf("")}
@@ -93,33 +96,37 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
         )
         Spacer(Modifier.height(8.dp))
 
-//        CustomTextField(
-//            value = status,
-//            onChange = {
-//                status = it
-//            },
-//            label = stringResource(Res.string.status)
-//        )
-        HorizontalDivider(color = primaryColor)
-        Spacer(Modifier.height(8 .dp))
-        Column {
-            statusOptions.forEach { option->
-                Row {
-                    RadioButton(
-                        selected = status ==option,
+        ExposedDropdownMenuBox(
+            expanded = showStatusOptions,
+            onExpandedChange = { showStatusOptions = !showStatusOptions }
+        ) {
+            CustomTextField(
+                value = status,
+                onChange = {},
+                readOnly = true,
+                modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
+                label = stringResource(Res.string.status)
+            )
+
+            ExposedDropdownMenu(
+                expanded = showStatusOptions,
+                onDismissRequest = { showStatusOptions = false },
+                containerColor = Color.White
+            ) {
+                statusOptions.forEach { option ->
+                    DropdownMenuItem(
+                        text = { Text(option) },
                         onClick = {
                             status = option
+                            showStatusOptions = false
                         }
-                    )
-                    Text(
-                        text = option
                     )
                 }
             }
         }
-        Spacer(Modifier.height(8 .dp))
-        HorizontalDivider(color = primaryColor)
-        Spacer(Modifier.height(16.dp))
+
+
+        Spacer(Modifier.height(8.dp))
 
         CustomTextField(
             value = if (startDate==null) "" else convertMillisToDate(startDate),
