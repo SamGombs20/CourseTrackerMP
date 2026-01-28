@@ -149,9 +149,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                 modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
                 label = stringResource(Res.string.status)
             )
-            if(statusError.isNotEmpty()){
-                ErrorText(statusError)
-            }
+
 
             ExposedDropdownMenu(
                 expanded = showStatusOptions,
@@ -169,6 +167,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                     )
                 }
             }
+        }
+        if(statusError.isNotEmpty()){
+            ErrorText(statusError)
         }
 
 

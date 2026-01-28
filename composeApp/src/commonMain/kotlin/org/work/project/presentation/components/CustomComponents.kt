@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,8 @@ fun CustomTextField(
 @Composable
 fun ErrorText(error: String){
     Box(
-        modifier = Modifier.padding(start = 16 .dp, top = 4 .dp)
+        modifier = Modifier.padding(start = 4 .dp, top = 4 .dp),
+        contentAlignment = Alignment.CenterStart
     ){
         Text(
             text = error,
