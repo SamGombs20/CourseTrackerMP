@@ -103,6 +103,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             isError = nameError.isNotEmpty(),
             label = stringResource(Res.string.name)
         )
+        if(nameError.isNotEmpty()){
+            ErrorText(nameError)
+        }
         Spacer(Modifier.height(8.dp))
 
 
@@ -115,6 +118,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             isError = categoryError.isNotEmpty(),
             label = stringResource(Res.string.category)
         )
+        if(categoryError.isNotEmpty()){
+            ErrorText(categoryError)
+        }
         Spacer(Modifier.height(8.dp))
 
         CustomTextField(
@@ -126,6 +132,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             isError = descriptionError.isNotEmpty(),
             label = stringResource(Res.string.description)
         )
+        if(descriptionError.isNotEmpty()){
+            ErrorText(descriptionError)
+        }
         Spacer(Modifier.height(8.dp))
 
         ExposedDropdownMenuBox(
@@ -140,6 +149,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                 modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
                 label = stringResource(Res.string.status)
             )
+            if(statusError.isNotEmpty()){
+                ErrorText(statusError)
+            }
 
             ExposedDropdownMenu(
                 expanded = showStatusOptions,
@@ -242,7 +254,6 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                                     rating
                                 )
                             )
-                            onClose(true)
                         }
                     },
                     colors = ButtonDefaults.textButtonColors(

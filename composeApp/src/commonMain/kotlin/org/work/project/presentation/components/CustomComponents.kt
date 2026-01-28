@@ -1,10 +1,12 @@
 package org.work.project.presentation.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +38,18 @@ fun CustomTextField(
             onValueChange = onChange,
             shape = RoundedCornerShape(16 .dp),
             trailingIcon = trailingIcon
+        )
+    }
+}
+@Composable
+fun ErrorText(error: String){
+    Box(
+        modifier = Modifier.padding(start = 16 .dp, top = 4 .dp)
+    ){
+        Text(
+            text = error,
+            color = MaterialTheme.colorScheme.error,
+            fontSize = 10 .sp
         )
     }
 }
