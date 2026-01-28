@@ -1,5 +1,6 @@
 package org.work.project.utils
 
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.ui.graphics.Color
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.completed
@@ -37,3 +38,4 @@ fun getStatusBackground(status: String): Color{
         else -> lightSecondaryColor
     }
 }
+//expect fun convertMillisToDate(millis:Long):String

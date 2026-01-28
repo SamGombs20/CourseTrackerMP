@@ -40,6 +40,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Course
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
+import org.work.project.utils.convertMillisToDate
 
 @Composable
 fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewModel()){
@@ -47,8 +48,8 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("")}
-    var startDate by remember { mutableStateOf("") }
-    var endDate by remember { mutableStateOf("")}
+    var startDate by remember { mutableStateOf<Long?>(null) }
+    var endDate by remember { mutableStateOf<Long?>(null)}
     var rating by remember { mutableStateOf("")}
     var showStartDate by remember { mutableStateOf(false) }
     var showEndDate by remember { mutableStateOf(false) }
@@ -94,11 +95,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
         Spacer(Modifier.height(16.dp))
 
         CustomTextField(
-            value = startDate,
-            onChange = {
-                startDate = it
-            },
+            value = convertMillisToDate(startDate),
             readOnly = true,
+            onChange = {},
             trailingIcon = {
                 IconButton(
                     onClick = {
@@ -116,11 +115,9 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
         Spacer(Modifier.height(16.dp))
 
         CustomTextField(
-            value = endDate,
+            value = convertMillisToDate(endDate),
             readOnly = true,
-            onChange = {
-                endDate = it
-            },
+            onChange = {},
             trailingIcon = {
                 IconButton(
                     onClick = {
@@ -171,8 +168,8 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                                 category,
                                 description,
                                 status,
-                                startDate,
-                                endDate,
+                                convertMillisToDate(startDate),
+                                convertMillisToDate(endDate),
                                 rating
                             )
                         )
@@ -193,14 +190,16 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
         if (showStartDate){
             DatePickerModal(
                 onDateSelected = {
-
+                    startDate = it
                 },
                 onDismiss = {showStartDate=false}
             )
         }
         if(showEndDate){
             DatePickerModal(
-                onDateSelected = {},
+                onDateSelected = {
+                    endDate = it
+                },
                 onDismiss = {
                     showEndDate = false
                 }
