@@ -260,10 +260,11 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                                     description,
                                     status,
                                     convertMillisToDate(startDate),
-                                    convertMillisToDate(endDate),
+                                    if (endDate==null) "" else convertMillisToDate(endDate),
                                     rating
                                 )
                             )
+                            onClose(true)
                         }
                     },
                     colors = ButtonDefaults.textButtonColors(
@@ -282,6 +283,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             DatePickerModal(
                 onDateSelected = {
                     startDate = it
+                    startDateError = ""
                 },
                 onDismiss = {showStartDate=false}
             )
