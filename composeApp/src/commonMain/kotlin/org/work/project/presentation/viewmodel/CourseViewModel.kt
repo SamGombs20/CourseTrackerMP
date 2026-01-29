@@ -53,6 +53,10 @@ class CourseViewModel: ViewModel() {
     }
     fun filterCoursesByStatus(status:String){
         viewModelScope.launch {
+            if (status =="All"){
+                _filteredCourses.value = _allCourses.value
+                return@launch
+            }
             _filteredCourses.value = _allCourses.value.filter { it.status ==status }
         }
     }
