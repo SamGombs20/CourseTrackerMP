@@ -32,6 +32,9 @@
     <string name="save">Save</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="sure">Are you sure?</string>
     <string name="duration">Duration</string>
     <string name="name_error">Course name cannot be empty</string>
     <string name="category_error">Course category cannot be empty</string>

@@ -13,10 +13,14 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,9 +35,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.course_details
+import coursetrackermp.composeapp.generated.resources.danger
 import coursetrackermp.composeapp.generated.resources.delete
 import coursetrackermp.composeapp.generated.resources.edit
+import coursetrackermp.composeapp.generated.resources.no
+import coursetrackermp.composeapp.generated.resources.sure
 import coursetrackermp.composeapp.generated.resources.trash
+import coursetrackermp.composeapp.generated.resources.yes
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.presentation.components.Banner
 import org.work.project.presentation.components.ButtonWithIcon
@@ -52,6 +61,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
     var showEditDialog by remember { mutableStateOf(false) }
+    var showDeleteAlert by remember { mutableStateOf(false) }
     val selectedCourse by courseViewModel.selectedCourse.collectAsStateWithLifecycle()
     LazyVerticalGrid(
         columns = GridCells.Adaptive(200 .dp),
@@ -126,11 +136,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                                         stringResource(Res.string.delete),
                                         Res.drawable.trash,
                                         onClick = {
-                                            selectedCourse?.let {
-                                                courseViewModel.deleteCourse(it)
-                                                showDialog = false
-                                                courseViewModel.setSelectedCourse(null)
-                                            }
+                                            showDeleteAlert = true
                                         }
                                     )
                                 }
@@ -171,5 +177,50 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                 }
             }
         }
+    }
+    if(showDeleteAlert){
+        AlertDialog(
+            onDismissRequest = {
+                showDeleteAlert = false
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        selectedCourse?.let {
+                            courseViewModel.deleteCourse(it)
+                            showDialog =false
+                            showDeleteAlert = false
+                            courseViewModel.setSelectedCourse(null)
+                        }
+                    }
+                ){
+                    Text(
+                        text = stringResource(Res.string.yes)
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showDeleteAlert = false
+                    }
+                ){
+                    Text(
+                        text = stringResource(Res.string.no)
+                    )
+                }
+            },
+            icon = {
+                Icon(
+                    painter = painterResource(Res.drawable.danger),
+                    contentDescription = null
+                )
+            },
+            title = {
+                Text(
+                    text = stringResource(Res.string.sure)
+                )
+            }
+        )
     }
 }
