@@ -29,6 +29,7 @@
     <string name="rating">Rating</string>
     <string name="close">Close</string>
     <string name="save">Save</string>
+    <string name="duration">Duration</string>
     <string name="name_error">Course name cannot be empty</string>
     <string name="category_error">Course category cannot be empty</string>
     <string name="description_error">Course description cannot be empty</string>

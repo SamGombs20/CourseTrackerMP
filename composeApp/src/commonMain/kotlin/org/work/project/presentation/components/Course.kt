@@ -1,6 +1,7 @@
 package org.work.project.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,12 +36,12 @@ import org.work.project.utils.getStatusColor
 import org.work.project.utils.getStatusIcon
 
 @Composable
-fun Course(course: Course){
+fun Course(course: Course, onClick:(Course)-> Unit){
     Column (
         modifier = Modifier.padding(8 .dp).width(200 .dp).shadow(
             elevation = 10 .dp,
             shape = RoundedCornerShape(16 .dp)
-        ).background(Color.White)
+        ).background(Color.White).clickable(onClick ={onClick(course)})
     ) {
         Box(
             modifier = Modifier.fillMaxWidth().height(120 .dp).padding(6 .dp).background(

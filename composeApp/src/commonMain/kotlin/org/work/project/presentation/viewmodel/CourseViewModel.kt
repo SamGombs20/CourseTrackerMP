@@ -12,10 +12,14 @@ import org.work.project.model.courses
 class CourseViewModel: ViewModel() {
     private val _courses = MutableStateFlow(courses)
     val courseList: StateFlow<List<Course>> = _courses.asStateFlow()
-
+    private val _selectedCourse = MutableStateFlow<Course?>(null)
+    val selectedCourse: StateFlow<Course?> = _selectedCourse.asStateFlow()
     fun addCourse(course: Course){
         viewModelScope.launch {
             _courses.value = _courses.value + course
         }
+    }
+    fun setSelectedCourse(course: Course){
+        _selectedCourse.value = course
     }
 }

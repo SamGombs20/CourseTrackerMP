@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.work.project.presentation.ui.secondaryColor
 
 @Composable
 fun CustomTextField(
@@ -54,4 +56,21 @@ fun ErrorText(error: String){
             fontSize = 10 .sp
         )
     }
+}
+@Composable
+fun DetailsTitle(title: String){
+    Text(
+        text = title,
+        fontSize = 16 .sp,
+        fontWeight = FontWeight(500),
+        modifier = Modifier.padding(vertical = 8 .dp),
+        color = secondaryColor
+    )
+}
+@Composable
+fun DetailsText(details: String){
+    Text(
+        text = details,
+        fontSize = 13 .sp,
+    )
 }

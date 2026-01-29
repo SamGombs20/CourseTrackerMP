@@ -85,6 +85,10 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
             descriptionError = "Course description cannot be empty"
             isValid = false
         }
+        else if(description.length<10){
+            descriptionError = "Course description must be at least 10 characters"
+            isValid = false
+        }
         if (status.isEmpty()){
             statusError = "Course status cannot be empty"
             isValid = false

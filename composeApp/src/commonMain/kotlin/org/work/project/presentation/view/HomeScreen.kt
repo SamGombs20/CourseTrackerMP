@@ -54,7 +54,9 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
             }
         }
         items(courses){ course->
-            Course(course)
+            Course(course){
+                courseViewModel.setSelectedCourse(course)
+            }
         }
     }
 }
