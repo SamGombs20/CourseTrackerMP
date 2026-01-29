@@ -8,17 +8,24 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.work.project.presentation.components.Banner
 import org.work.project.presentation.components.Course
+import org.work.project.presentation.components.CourseDetails
 import org.work.project.presentation.components.MainHeader
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
@@ -28,9 +35,8 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
 
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
-    LaunchedEffect(courses){
-
-    }
+    var showDialog by remember { mutableStateOf(false) }
+    val selectedCourse by courseViewModel.selectedCourse.collectAsStateWithLifecycle()
     LazyVerticalGrid(
         columns = GridCells.Adaptive(200 .dp),
         modifier = Modifier.padding(16 .dp)
@@ -56,6 +62,26 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
         items(courses){ course->
             Course(course){
                 courseViewModel.setSelectedCourse(course)
+                showDialog = true
+            }
+        }
+        if (showDialog && selectedCourse!=null){
+            item {
+                Dialog(
+                    onDismissRequest = {
+                        showDialog = false
+                    }
+                ){
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        )
+                    ) {
+                        Column {
+                            CourseDetails(selectedCourse!!)
+                        }
+                    }
+                }
             }
         }
     }
