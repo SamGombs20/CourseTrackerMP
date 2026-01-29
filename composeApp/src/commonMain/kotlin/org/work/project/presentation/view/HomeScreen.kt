@@ -31,7 +31,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -40,6 +43,7 @@ import coursetrackermp.composeapp.generated.resources.course_details
 import coursetrackermp.composeapp.generated.resources.danger
 import coursetrackermp.composeapp.generated.resources.delete
 import coursetrackermp.composeapp.generated.resources.edit
+import coursetrackermp.composeapp.generated.resources.edit_course
 import coursetrackermp.composeapp.generated.resources.no
 import coursetrackermp.composeapp.generated.resources.sure
 import coursetrackermp.composeapp.generated.resources.trash
@@ -54,6 +58,7 @@ import org.work.project.presentation.components.EditCourse
 import org.work.project.presentation.components.MainHeader
 import org.work.project.presentation.components.TitleWithIcon
 import org.work.project.presentation.ui.primaryColor
+import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
 
 
@@ -163,6 +168,14 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                 )
             ) {
                 Column(modifier = Modifier.padding(16 .dp)) {
+                    Text(
+                        text = stringResource(Res.string.edit_course),
+                        fontSize = 22 .sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = secondaryColor,
+                        modifier = Modifier.padding(16 .dp).fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
                     LazyColumn {
                         item {
                             selectedCourse?.let {
@@ -218,7 +231,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                     painter = painterResource(Res.drawable.danger),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.size(32 .dp)
+                    modifier = Modifier.size(40 .dp)
                 )
             },
             title = {
