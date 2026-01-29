@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -15,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -22,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
@@ -67,7 +70,7 @@ fun ErrorText(error: String){
 fun DetailsTitle(title: String){
     Text(
         text = title,
-        fontSize = 16 .sp,
+        fontSize = 15 .sp,
         fontWeight = FontWeight(500),
         style = TextStyle(
             textDecoration = TextDecoration.Underline
@@ -77,27 +80,31 @@ fun DetailsTitle(title: String){
     )
 }
 @Composable
-fun DetailsText(details: String){
+fun DetailsText(details: String, color: Color?=null){
     Text(
         text = details,
         fontSize = 13 .sp,
+        color = color?: primaryColor
     )
 }
 @Composable
 fun TitleWithIcon(title: String, icon: DrawableResource){
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16 .dp)
+        modifier = Modifier.padding(vertical = 16 .dp),
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.spacedBy(8 .dp)
     ){
         Text(
             text = title,
-            fontSize = 18 .sp,
-            fontWeight = FontWeight(600)
+            fontSize = 17 .sp,
+            fontWeight = FontWeight(600),
+            color = secondaryColor
         )
         Icon(
             painter = painterResource(icon),
             contentDescription = title,
             tint = secondaryColor,
+            modifier = Modifier.size(18 .dp)
 
         )
     }

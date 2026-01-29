@@ -19,6 +19,7 @@ import coursetrackermp.composeapp.generated.resources.status
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Course
 import org.work.project.utils.getStatusBackground
+import org.work.project.utils.getStatusColor
 
 @Composable
 fun CourseDetails(course: Course){
@@ -40,7 +41,7 @@ fun CourseDetails(course: Course){
                     RoundedCornerShape(16 .dp)).padding(6 .dp, 4.dp)
 
         ){
-            DetailsText(course.status)
+            DetailsText(course.status, getStatusColor(course.status))
         }
         DetailsTitle(stringResource(Res.string.duration))
         Row {
