@@ -27,7 +27,8 @@ class CourseViewModel: ViewModel() {
     }
     fun addCourse(course: Course){
         viewModelScope.launch {
-            _filteredCourses.value = _allCourses.value + course
+            _allCourses.value = _allCourses.value + course
+            _filteredCourses.value = _allCourses.value
         }
     }
     fun setSelectedCourse(course: Course?){
