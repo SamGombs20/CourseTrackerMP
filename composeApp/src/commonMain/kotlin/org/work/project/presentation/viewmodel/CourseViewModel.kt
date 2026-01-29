@@ -10,13 +10,24 @@ import org.work.project.model.Course
 import org.work.project.model.courses
 
 class CourseViewModel: ViewModel() {
-    private val _courses = MutableStateFlow(courses)
-    val courseList: StateFlow<List<Course>> = _courses.asStateFlow()
+    private val _allCourses = MutableStateFlow(emptyList<Course>())
+    private val _filteredCourses = MutableStateFlow(emptyList<Course>())
+    val courseList: StateFlow<List<Course>> = _filteredCourses.asStateFlow()
     private val _selectedCourse = MutableStateFlow<Course?>(null)
     val selectedCourse: StateFlow<Course?> = _selectedCourse.asStateFlow()
+
+    init {
+        setCourses(courses)
+    }
+    fun setCourses(courses: List<Course>){
+        viewModelScope.launch {
+            _allCourses.value = courses
+            _filteredCourses.value = courses
+        }
+    }
     fun addCourse(course: Course){
         viewModelScope.launch {
-            _courses.value = _courses.value + course
+            _allCourses.value = _allCourses.value + course
         }
     }
     fun setSelectedCourse(course: Course?){
@@ -26,9 +37,9 @@ class CourseViewModel: ViewModel() {
     }
     fun editCourse(course: Course){
         viewModelScope.launch {
-            _courses.value.forEachIndexed { index, c->
+            _allCourses.value.forEachIndexed { index, c->
                 if(c.id == course.id){
-                    _courses.value = _courses.value.toMutableList().apply {
+                    _allCourses.value = _allCourses.value.toMutableList().apply {
                         this[index] = course
                     }
                 }
@@ -37,12 +48,12 @@ class CourseViewModel: ViewModel() {
     }
     fun deleteCourse(course: Course){
         viewModelScope.launch {
-            _courses.value = _courses.value.filter { it.id != course.id }
+            _allCourses.value = _allCourses.value.filter { it.id != course.id }
         }
     }
     fun filterCoursesByStatus(status:String){
         viewModelScope.launch {
-            _courses.value = _courses.value.filter { it.status ==status }
+            _filteredCourses.value = _allCourses.value.filter { it.status ==status }
         }
     }
 }
