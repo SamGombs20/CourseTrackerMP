@@ -23,12 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coursetrackermp.composeapp.generated.resources.Res
-import coursetrackermp.composeapp.generated.resources.progress
 import org.jetbrains.compose.resources.painterResource
 import org.work.project.model.Course
-import org.work.project.presentation.ui.inProgress
-import org.work.project.presentation.ui.inProgressLight
 import org.work.project.presentation.ui.lightGray
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.utils.getStatusBackground
@@ -36,12 +32,12 @@ import org.work.project.utils.getStatusColor
 import org.work.project.utils.getStatusIcon
 
 @Composable
-fun Course(course: Course, onClick:(Course)-> Unit){
+fun Course(course: Course, onClick:()-> Unit){
     Column (
         modifier = Modifier.padding(8 .dp).width(200 .dp).shadow(
             elevation = 10 .dp,
             shape = RoundedCornerShape(16 .dp)
-        ).background(Color.White).clickable(onClick ={onClick(course)})
+        ).background(Color.White).clickable(onClick ={onClick()})
     ) {
         Box(
             modifier = Modifier.fillMaxWidth().height(120 .dp).padding(6 .dp).background(

@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.work.project.model.Course
 import org.work.project.presentation.components.Banner
 import org.work.project.presentation.components.Course
 import org.work.project.presentation.components.CourseDetails
@@ -36,7 +37,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
 
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
-    val selectedCourse by courseViewModel.selectedCourse.collectAsStateWithLifecycle()
+    var selectedCourse by remember { mutableStateOf<Course?>(null) }
     LazyVerticalGrid(
         columns = GridCells.Adaptive(200 .dp),
         modifier = Modifier.padding(16 .dp)
@@ -61,28 +62,30 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
         }
         items(courses){ course->
             Course(course){
-                courseViewModel.setSelectedCourse(course)
+                selectedCourse = course
                 showDialog = true
             }
         }
-        if (showDialog && selectedCourse!=null){
-            item {
-                Dialog(
-                    onDismissRequest = {
-                        showDialog = false
-                    }
-                ){
-                    Card(
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White
-                        )
-                    ) {
-                        Column {
-                            CourseDetails(selectedCourse!!)
-                        }
-                    }
+
+    }
+    if (showDialog && selectedCourse!=null){
+
+        Dialog(
+            onDismissRequest = {
+                showDialog = false
+                selectedCourse = null
+            }
+        ){
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
+            ) {
+                Column {
+                    CourseDetails(selectedCourse!!)
                 }
             }
         }
+
     }
 }
