@@ -19,7 +19,7 @@ class CourseViewModel: ViewModel() {
             _courses.value = _courses.value + course
         }
     }
-    fun setSelectedCourse(course: Course){
+    fun setSelectedCourse(course: Course?){
         _selectedCourse.value = course
     }
 }

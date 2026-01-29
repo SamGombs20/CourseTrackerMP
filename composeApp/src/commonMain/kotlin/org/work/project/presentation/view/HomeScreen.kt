@@ -37,7 +37,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
 
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
-    var selectedCourse by remember { mutableStateOf<Course?>(null) }
+    val selectedCourse by courseViewModel.selectedCourse.collectAsStateWithLifecycle()
     LazyVerticalGrid(
         columns = GridCells.Adaptive(200 .dp),
         modifier = Modifier.padding(16 .dp)
@@ -62,7 +62,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
         }
         items(courses){ course->
             Course(course){
-                selectedCourse = course
+                courseViewModel.setSelectedCourse(course)
                 showDialog = true
             }
         }
@@ -73,7 +73,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
         Dialog(
             onDismissRequest = {
                 showDialog = false
-                selectedCourse = null
+                courseViewModel.setSelectedCourse(null)
             }
         ){
             Card(
@@ -81,7 +81,9 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                     containerColor = Color.White
                 )
             ) {
-                Column {
+                Column(
+                    modifier = Modifier.padding(16 .dp)
+                ) {
                     CourseDetails(selectedCourse!!)
                 }
             }

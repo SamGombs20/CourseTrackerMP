@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.work.project.presentation.ui.secondaryColor
@@ -62,8 +63,11 @@ fun DetailsTitle(title: String){
     Text(
         text = title,
         fontSize = 16 .sp,
-        fontWeight = FontWeight(500),
-        modifier = Modifier.padding(vertical = 8 .dp),
+        fontWeight = FontWeight(600),
+        style = TextStyle(
+            textDecoration = TextDecoration.Underline
+        ),
+        modifier = Modifier.padding(top = 8 .dp, bottom = 4 .dp),
         color = secondaryColor
     )
 }
