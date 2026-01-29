@@ -264,7 +264,7 @@ fun EditCourse(onClose:(Boolean)-> Unit, course: Course, courseViewModel: Course
                                     category,
                                     description,
                                     status,
-                                    convertMillisToDate(startDate),
+                                    if (startDate==null && course.startDate.isNotEmpty()) course.startDate else convertMillisToDate(startDate),
                                     if (endDate == null) "" else convertMillisToDate(endDate),
                                     rating
                                 )
