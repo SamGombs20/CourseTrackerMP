@@ -19,6 +19,7 @@ import androidx.compose.material3.CardDefaults
 
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -183,6 +184,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
             onDismissRequest = {
                 showDeleteAlert = false
             },
+            containerColor = Color.White,
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -213,7 +215,8 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
             icon = {
                 Icon(
                     painter = painterResource(Res.drawable.danger),
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.error
                 )
             },
             title = {
