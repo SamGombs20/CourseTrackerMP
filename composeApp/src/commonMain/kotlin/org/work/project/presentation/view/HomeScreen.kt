@@ -39,6 +39,7 @@ import org.work.project.presentation.components.Banner
 import org.work.project.presentation.components.ButtonWithIcon
 import org.work.project.presentation.components.Course
 import org.work.project.presentation.components.CourseDetails
+import org.work.project.presentation.components.EditCourse
 import org.work.project.presentation.components.MainHeader
 import org.work.project.presentation.components.TitleWithIcon
 import org.work.project.presentation.ui.primaryColor
@@ -50,6 +51,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
 
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
+    var showEditDialog by remember { mutableStateOf(false) }
     val selectedCourse by courseViewModel.selectedCourse.collectAsStateWithLifecycle()
     LazyVerticalGrid(
         columns = GridCells.Adaptive(200 .dp),
@@ -135,5 +137,36 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
             }
         }
 
+
+    }
+    if (showEditDialog){
+        Dialog(
+            onDismissRequest = {
+                showEditDialog = false
+            }
+        ){
+            Card(
+                modifier = Modifier.padding(16 .dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
+            ) {
+                Column {
+                    LazyColumn {
+                        item {
+                            selectedCourse?.let {
+                                EditCourse(
+                                    onClose = {
+                                        showEditDialog=false
+                                        showDialog = false
+                                        courseViewModel.setSelectedCourse(null)
+                                    },
+                                    course = it)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

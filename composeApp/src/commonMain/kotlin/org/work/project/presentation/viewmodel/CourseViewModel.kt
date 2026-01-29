@@ -20,6 +20,19 @@ class CourseViewModel: ViewModel() {
         }
     }
     fun setSelectedCourse(course: Course?){
-        _selectedCourse.value = course
+        viewModelScope.launch {
+            _selectedCourse.value = course
+        }
+    }
+    fun editCourse(course: Course){
+        viewModelScope.launch {
+            _courses.value.forEachIndexed { index, c->
+                if(c.id == course.id){
+                    _courses.value = _courses.value.toMutableList().apply {
+                        this[index] = course
+                    }
+                }
+            }
+        }
     }
 }
