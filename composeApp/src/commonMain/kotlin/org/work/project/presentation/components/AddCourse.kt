@@ -46,6 +46,7 @@ import org.work.project.model.Course
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
 import org.work.project.utils.convertMillisToDate
+import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -258,7 +259,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewMo
                         if(validateInputs()){
                             courseViewModel.addCourse(
                                 Course(
-                                    id = "c00",
+                                    id = "${Random.nextInt()}",
                                     name,
                                     category,
                                     description,

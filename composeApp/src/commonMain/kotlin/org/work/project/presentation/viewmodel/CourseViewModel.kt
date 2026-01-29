@@ -27,7 +27,7 @@ class CourseViewModel: ViewModel() {
     }
     fun addCourse(course: Course){
         viewModelScope.launch {
-            _allCourses.value = _allCourses.value + course
+            _filteredCourses.value = _allCourses.value + course
         }
     }
     fun setSelectedCourse(course: Course?){
@@ -39,7 +39,7 @@ class CourseViewModel: ViewModel() {
         viewModelScope.launch {
             _allCourses.value.forEachIndexed { index, c->
                 if(c.id == course.id){
-                    _allCourses.value = _allCourses.value.toMutableList().apply {
+                    _filteredCourses.value = _allCourses.value.toMutableList().apply {
                         this[index] = course
                     }
                 }
