@@ -14,7 +14,9 @@ fun CourseList(){
 
     ){
         items(courses){ course->
-            Course(course)
+            Course(course){
+
+            }
         }
     }
 }
