@@ -2,6 +2,7 @@ package org.work.project.presentation.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,9 +29,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.course_details
+import coursetrackermp.composeapp.generated.resources.delete
+import coursetrackermp.composeapp.generated.resources.edit
+import coursetrackermp.composeapp.generated.resources.trash
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Course
 import org.work.project.presentation.components.Banner
+import org.work.project.presentation.components.ButtonWithIcon
 import org.work.project.presentation.components.Course
 import org.work.project.presentation.components.CourseDetails
 import org.work.project.presentation.components.MainHeader
@@ -95,6 +100,28 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                         TitleWithIcon(stringResource(Res.string.course_details), Res.drawable.course_details)
                     }
                     CourseDetails(selectedCourse!!)
+                    Spacer(Modifier.height(16 .dp))
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.BottomEnd
+                    ){
+                        Row {
+                            ButtonWithIcon(
+                                stringResource(Res.string.edit),
+                                Res.drawable.edit,
+                                onClick = {
+
+                                }
+                            )
+                            ButtonWithIcon(
+                                stringResource(Res.string.delete),
+                                Res.drawable.trash,
+                                onClick = {
+
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }
