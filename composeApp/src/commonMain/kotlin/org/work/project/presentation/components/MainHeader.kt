@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.arrow_down
@@ -38,9 +39,10 @@ import coursetrackermp.composeapp.generated.resources.progress
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.Category
+import org.work.project.presentation.viewmodel.CourseViewModel
 
 @Composable
-fun MainHeader(){
+fun MainHeader(courseViewModel: CourseViewModel = viewModel()){
     var selectedOption by remember{ mutableStateOf(Category(Res.drawable.book, "All")) }
     val selectionOptions = listOf<Category>(
         Category(
@@ -113,6 +115,7 @@ fun MainHeader(){
                                },
                         onClick = {
                             selectedOption= option
+                            courseViewModel.filterCoursesByStatus(option.name)
                             isExpanded = false
                         },
                         leadingIcon = {

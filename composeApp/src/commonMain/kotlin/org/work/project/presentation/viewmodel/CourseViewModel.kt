@@ -40,4 +40,9 @@ class CourseViewModel: ViewModel() {
             _courses.value = _courses.value.filter { it.id != course.id }
         }
     }
+    fun filterCoursesByStatus(status:String){
+        viewModelScope.launch {
+            _courses.value = _courses.value.filter { it.status ==status }
+        }
+    }
 }
