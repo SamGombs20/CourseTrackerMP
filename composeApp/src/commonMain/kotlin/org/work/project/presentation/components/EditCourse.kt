@@ -94,7 +94,7 @@ fun EditCourse(onClose:(Boolean)-> Unit, course: Course, courseViewModel: Course
             statusError = "Course status cannot be empty"
             isValid = false
         }
-        if (startDate==null){
+        if (startDate==null && course.startDate.isEmpty()){
             startDateError = "Course start date cannot be empty"
             isValid = false
         }

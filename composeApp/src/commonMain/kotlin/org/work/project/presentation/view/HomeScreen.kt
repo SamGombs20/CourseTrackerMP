@@ -119,7 +119,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                                         stringResource(Res.string.edit),
                                         Res.drawable.edit,
                                         onClick = {
-
+                                            showEditDialog = true
                                         }
                                     )
                                     ButtonWithIcon(
@@ -146,12 +146,11 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
             }
         ){
             Card(
-                modifier = Modifier.padding(16 .dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color.White
                 )
             ) {
-                Column {
+                Column(modifier = Modifier.padding(16 .dp)) {
                     LazyColumn {
                         item {
                             selectedCourse?.let {
