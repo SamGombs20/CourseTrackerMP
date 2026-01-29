@@ -92,7 +92,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                     modifier = Modifier.fillMaxWidth().padding(16 .dp)
                 ) {
                     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
-                        TitleWithIcon(stringResource(Res.string.course_details), Res.drawable)
+                        TitleWithIcon(stringResource(Res.string.course_details), Res.drawable.course_details)
                     }
                     CourseDetails(selectedCourse!!)
                 }
