@@ -50,6 +50,7 @@ class CourseViewModel: ViewModel() {
     fun deleteCourse(course: Course){
         viewModelScope.launch {
             _allCourses.value = _allCourses.value.filter { it.id != course.id }
+            _filteredCourses.value = _allCourses.value
         }
     }
     fun filterCoursesByStatus(status:String){
