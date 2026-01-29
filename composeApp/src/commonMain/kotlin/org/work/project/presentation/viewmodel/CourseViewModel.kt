@@ -35,4 +35,9 @@ class CourseViewModel: ViewModel() {
             }
         }
     }
+    fun deleteCourse(course: Course){
+        viewModelScope.launch {
+            _courses.value = _courses.value.filter { it.id != course.id }
+        }
+    }
 }

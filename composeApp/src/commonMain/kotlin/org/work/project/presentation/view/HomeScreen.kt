@@ -126,7 +126,11 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                                         stringResource(Res.string.delete),
                                         Res.drawable.trash,
                                         onClick = {
-
+                                            selectedCourse?.let {
+                                                courseViewModel.deleteCourse(it)
+                                                showDialog = false
+                                                courseViewModel.setSelectedCourse(null)
+                                            }
                                         }
                                     )
                                 }
