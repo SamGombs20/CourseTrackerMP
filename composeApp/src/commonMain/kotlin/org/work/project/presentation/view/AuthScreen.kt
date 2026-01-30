@@ -78,12 +78,12 @@ fun AuthScreen(){
         ) {
             if (isSignUp){
                 RegisterScreen {
-                    isSignUp =it
+
                 }
             }
             else{
                 LogInScreen {
-                    isSignUp=it
+
                 }
             }
         }
