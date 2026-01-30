@@ -1,6 +1,7 @@
 package org.work.project.presentation.view
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,7 +59,7 @@ fun LogInScreen(
             modifier = Modifier.widthIn(max = 370 .dp).shadow(
                 elevation = 10 .dp,
                 shape = RoundedCornerShape(16 .dp)
-            ).padding(16 .dp),
+            ).background(Color.White, RoundedCornerShape(16 .dp)).padding(16 .dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -113,7 +114,7 @@ fun LogInScreen(
                 onClick = {
 
                 },
-                modifier = Modifier.fillMaxWidth(0.9f),
+                modifier = Modifier.fillMaxWidth(0.8f),
                 colors = ButtonDefaults.textButtonColors(
                     containerColor = secondaryColor,
                     contentColor = Color.White
