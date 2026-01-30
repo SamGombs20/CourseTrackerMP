@@ -41,6 +41,7 @@ import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
+import org.work.project.presentation.components.ErrorText
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
@@ -50,6 +51,29 @@ fun LogInScreen(
 ){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var usernameError by remember { mutableStateOf("") }
+    var passwordError by remember { mutableStateOf("") }
+
+    fun validateInputs(): Boolean{
+        var isValid = true
+        if(username.isEmpty()){
+            usernameError = "Username cannot be empty"
+            isValid = false
+        }
+        else if(username.length<4){
+            usernameError= "Username must have at least 4 characters"
+            isValid = false
+        }
+        if (password.isEmpty()){
+            passwordError = "Password cannot be empty"
+            isValid = false
+        }
+        else if (password.length<6){
+            passwordError = "Password must be at least 6 characters long"
+            isValid =false
+        }
+        return  isValid
+    }
         Column (
             modifier = Modifier.fillMaxSize().padding(16 .dp),
             verticalArrangement = Arrangement.Center,
@@ -70,18 +94,27 @@ fun LogInScreen(
                 value = username,
                 onChange = {
                     username = it
+                    usernameError =""
                 },
-                label = stringResource(Res.string.username_text)
-
+                label = stringResource(Res.string.username_text),
+                isError = usernameError.isNotEmpty()
             )
+            if(usernameError.isNotEmpty()){
+                ErrorText(usernameError)
+            }
             Spacer(Modifier.height(8 .dp))
             CustomTextField(
                 value = password,
                 onChange = {
                     password = it
+                    passwordError = ""
                 },
+                isError = passwordError.isNotEmpty(),
                 label = stringResource(Res.string.password_text)
             )
+            if (passwordError.isNotEmpty()){
+                ErrorText(passwordError)
+            }
             Spacer(Modifier.height(4 .dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -104,9 +137,11 @@ fun LogInScreen(
             Spacer(Modifier.height(16 .dp))
             TextButton(
                 onClick = {
-                    navController.navigate(Screen.Main.route){
-                        popUpTo(Screen.Login.route){
-                            inclusive = true
+                    if(validateInputs()){
+                        navController.navigate(Screen.Main.route){
+                            popUpTo(Screen.Login.route){
+                                inclusive = true
+                            }
                         }
                     }
                 },
