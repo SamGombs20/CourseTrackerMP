@@ -40,11 +40,12 @@ class CourseViewModel: ViewModel() {
         viewModelScope.launch {
             _allCourses.value.forEachIndexed { index, c->
                 if(c.id == course.id){
-                    _filteredCourses.value = _allCourses.value.toMutableList().apply {
+                    _allCourses.value = _allCourses.value.toMutableList().apply {
                         this[index] = course
                     }
                 }
             }
+            _filteredCourses.value = _allCourses.value
         }
     }
     fun deleteCourse(course: Course){
