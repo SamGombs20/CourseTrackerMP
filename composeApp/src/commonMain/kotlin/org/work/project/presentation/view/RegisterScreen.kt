@@ -94,7 +94,11 @@ fun RegisterScreen (
             passwordError ="Must be at least 6 characters long"
             isValid = false
         }
-        if (confirmPassword.length<6){
+        if(confirmPassword.isEmpty()){
+            confirmPasswordError = "Cannot be empty"
+            isValid = false
+        }
+        else if (confirmPassword.length<6){
             confirmPasswordError = "Must be at least 6 characters long"
             isValid = false
         }
