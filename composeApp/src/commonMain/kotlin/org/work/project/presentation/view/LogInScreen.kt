@@ -1,20 +1,16 @@
 package org.work.project.presentation.view
 
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 
 import androidx.compose.material3.ButtonDefaults
@@ -28,11 +24,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.log_in
 import coursetrackermp.composeapp.generated.resources.log_in_title
@@ -42,24 +39,19 @@ import coursetrackermp.composeapp.generated.resources.sign_up
 import coursetrackermp.composeapp.generated.resources.username_text
 import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
 fun LogInScreen(
+    navController: NavController,
     pageToggle:(Boolean)-> Unit
 ){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    Box(
-        modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-        contentAlignment = Alignment.Center
-    ){
         Column (
-            modifier = Modifier.widthIn(max = 370 .dp).shadow(
-                elevation = 10 .dp,
-                shape = RoundedCornerShape(16 .dp)
-            ).background(Color.White, RoundedCornerShape(16 .dp)).padding(16 .dp),
+            modifier = Modifier.fillMaxSize().padding(16 .dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -112,9 +104,9 @@ fun LogInScreen(
             Spacer(Modifier.height(16 .dp))
             TextButton(
                 onClick = {
-
+                    navController.navigate(Screen.Main.route)
                 },
-                modifier = Modifier.fillMaxWidth(0.8f),
+                modifier = Modifier.fillMaxWidth(0.9f),
                 colors = ButtonDefaults.textButtonColors(
                     containerColor = secondaryColor,
                     contentColor = Color.White
@@ -126,5 +118,5 @@ fun LogInScreen(
                 Text(stringResource(Res.string.log_in))
             }
         }
-    }
+
 }

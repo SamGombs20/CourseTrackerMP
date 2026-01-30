@@ -25,6 +25,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.confirm
 import coursetrackermp.composeapp.generated.resources.create
@@ -37,11 +39,13 @@ import coursetrackermp.composeapp.generated.resources.register
 import coursetrackermp.composeapp.generated.resources.sign_in
 import coursetrackermp.composeapp.generated.resources.username_text
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
 fun RegisterScreen (
+    navController: NavController,
     pageToggle:(Boolean)-> Unit
 ){
     var firstName by remember { mutableStateOf("") }
@@ -133,7 +137,7 @@ fun RegisterScreen (
         Spacer(Modifier.height(4 .dp))
         TextButton(
             onClick = {
-
+                navController.navigate(Screen.Main.route)
             },
             modifier = Modifier.fillMaxWidth(0.9f),
             colors = ButtonDefaults.textButtonColors(

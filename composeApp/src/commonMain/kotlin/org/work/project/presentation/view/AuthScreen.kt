@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.courseTracker
 import coursetrackermp.composeapp.generated.resources.welcome
@@ -32,7 +33,7 @@ import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 
 @Composable
-fun AuthScreen(){
+fun AuthScreen(navController: NavController){
     var isSignUp by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -77,13 +78,13 @@ fun AuthScreen(){
 
         ) {
             if (isSignUp){
-                RegisterScreen {
-
+                RegisterScreen(navController) {
+                    isSignUp =it
                 }
             }
             else{
-                LogInScreen {
-
+                LogInScreen(navController) {
+                    isSignUp=it
                 }
             }
         }

@@ -42,7 +42,7 @@ import org.work.project.model.Category
 import org.work.project.presentation.viewmodel.CourseViewModel
 
 @Composable
-fun MainHeader(courseViewModel: CourseViewModel = viewModel()){
+fun MainHeader(courseViewModel: CourseViewModel){
     var selectedOption by remember{ mutableStateOf(Category(Res.drawable.book, "All")) }
     val selectionOptions = listOf<Category>(
         Category(

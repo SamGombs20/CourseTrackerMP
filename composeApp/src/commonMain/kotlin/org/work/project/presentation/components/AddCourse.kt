@@ -50,7 +50,7 @@ import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel= viewModel()){
+fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel){
     var name by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }

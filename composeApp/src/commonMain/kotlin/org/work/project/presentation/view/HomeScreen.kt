@@ -63,7 +63,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 
 
 @Composable
-fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
+fun HomeScreen(courseViewModel: CourseViewModel){
 
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
@@ -76,13 +76,13 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
     ) {
         item(span = { GridItemSpan(maxLineSpan) }) {
             Column {
-                Banner()
+                Banner(courseViewModel)
                 Spacer(Modifier.height(16 .dp))
             }
         }
         item(span = {GridItemSpan(maxLineSpan)}) {
             Column {
-                MainHeader()
+                MainHeader(courseViewModel)
                 Spacer(Modifier.height(24 .dp))
             }
         }
@@ -185,7 +185,7 @@ fun HomeScreen(courseViewModel: CourseViewModel= viewModel()){
                                         showDialog = false
                                         courseViewModel.setSelectedCourse(null)
                                     },
-                                    course = it)
+                                    course = it, courseViewModel)
                             }
                         }
                     }

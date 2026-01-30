@@ -48,7 +48,7 @@ import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
 
 @Composable
-fun Banner(courseViewModel: CourseViewModel= viewModel()){
+fun Banner(courseViewModel: CourseViewModel){
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
     Box(
@@ -151,7 +151,7 @@ fun Banner(courseViewModel: CourseViewModel= viewModel()){
                             item {
                                 AddCourse(onClose = {
                                     showDialog = false
-                                })
+                                }, courseViewModel)
                             }
                         }
                     }

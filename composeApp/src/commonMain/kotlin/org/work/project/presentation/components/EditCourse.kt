@@ -50,7 +50,7 @@ import org.work.project.utils.convertMillisToDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditCourse(onClose:(Boolean)-> Unit, course: Course, courseViewModel: CourseViewModel= viewModel()){
+fun EditCourse(onClose:(Boolean)-> Unit, course: Course, courseViewModel: CourseViewModel){
     var name by remember { mutableStateOf(course.name) }
     var category by remember { mutableStateOf(course.category) }
     var description by remember { mutableStateOf(course.description) }

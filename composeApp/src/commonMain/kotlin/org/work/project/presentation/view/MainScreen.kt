@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.about
 import coursetrackermp.composeapp.generated.resources.sign_out
@@ -43,10 +44,12 @@ import org.jetbrains.compose.resources.stringResource
 
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
+import org.work.project.presentation.viewmodel.CourseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(){
+    val courseViewModel: CourseViewModel = viewModel()
     var expanded by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -150,7 +153,7 @@ fun MainScreen(){
             Column(
                 modifier = Modifier.padding(innerPadding).background(Color.White).fillMaxSize()
             ) {
-                HomeScreen()
+                HomeScreen(courseViewModel)
             }
         }
     )
