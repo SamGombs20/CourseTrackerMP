@@ -137,7 +137,11 @@ fun RegisterScreen (
         Spacer(Modifier.height(4 .dp))
         TextButton(
             onClick = {
-                navController.navigate(Screen.Main.route)
+                navController.navigate(Screen.Main.route){
+                    popUpTo(Screen.Login.route){
+                        inclusive = true
+                    }
+                }
             },
             modifier = Modifier.fillMaxWidth(0.9f),
             colors = ButtonDefaults.textButtonColors(
