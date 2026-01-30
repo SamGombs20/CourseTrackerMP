@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,13 +51,14 @@ fun LogInScreen(
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Box(
-        modifier = Modifier.widthIn(max = 350 .dp).shadow(
-            elevation = 10 .dp,
-            shape = RoundedCornerShape(16 .dp)
-        )
+        modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+        contentAlignment = Alignment.Center
     ){
         Column (
-            modifier = Modifier.fillMaxSize().padding(16 .dp),
+            modifier = Modifier.widthIn(max = 370 .dp).shadow(
+                elevation = 10 .dp,
+                shape = RoundedCornerShape(16 .dp)
+            ).padding(16 .dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
