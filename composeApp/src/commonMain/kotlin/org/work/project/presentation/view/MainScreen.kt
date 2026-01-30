@@ -49,7 +49,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(){
-    val courseViewModel: CourseViewModel = viewModel()
+    val courseViewModel = remember { CourseViewModel() }
     var expanded by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {

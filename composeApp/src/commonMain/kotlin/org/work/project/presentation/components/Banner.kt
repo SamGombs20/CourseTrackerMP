@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.active_courses
 import coursetrackermp.composeapp.generated.resources.add
@@ -49,7 +48,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 
 @Composable
 fun Banner(courseViewModel: CourseViewModel){
-    val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
+    val courses by courseViewModel.allCourses.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier.fillMaxWidth().height(120 .dp).background(

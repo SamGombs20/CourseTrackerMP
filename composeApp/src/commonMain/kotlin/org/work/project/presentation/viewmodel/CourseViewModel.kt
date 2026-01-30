@@ -15,7 +15,7 @@ class CourseViewModel: ViewModel() {
     val courseList: StateFlow<List<Course>> = _filteredCourses.asStateFlow()
     private val _selectedCourse = MutableStateFlow<Course?>(null)
     val selectedCourse: StateFlow<Course?> = _selectedCourse.asStateFlow()
-
+    val allCourses: StateFlow<List<Course>> = _allCourses.asStateFlow()
     init {
         setCourses(courses)
     }
