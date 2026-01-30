@@ -25,7 +25,7 @@ fun RootNavigation(){
 //            }
 //        }
         composable(Screen.Main.route) {
-            MainScreen()
+            MainScreen(navController)
         }
     }
 }
