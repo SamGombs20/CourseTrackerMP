@@ -28,7 +28,6 @@ class AuthViewModel: ViewModel() {
     }
     fun signIn(username:String, password: String){
         viewModelScope.launch {
-//            val user = UserLogin(username, password)
             val result = AuthApi.signIn(username, password)
             result.onSuccess {
                 _token.value = it
