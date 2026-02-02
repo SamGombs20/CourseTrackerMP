@@ -69,6 +69,7 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation("io.ktor:ktor-client-okhttp")
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

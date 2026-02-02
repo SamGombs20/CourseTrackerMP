@@ -11,9 +11,7 @@ import org.work.project.model.api.AuthApi
 class AuthViewModel: ViewModel() {
     private val _message = MutableStateFlow("")
     val message: StateFlow<String> = _message.asStateFlow()
-    init {
-        getMessage()
-    }
+
     fun getMessage(){
         viewModelScope.launch {
             val result = AuthApi.getMessage()

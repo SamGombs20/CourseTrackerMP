@@ -39,6 +39,7 @@ fun AuthScreen(navController: NavController){
     val authViewModel = remember { AuthViewModel() }
     var isSignUp by remember { mutableStateOf(false) }
     val message by authViewModel.message.collectAsStateWithLifecycle()
+    authViewModel.getMessage()
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
