@@ -1,5 +1,7 @@
 package org.work.project.model
 
+import kotlinx.serialization.Serializable
+
 class CourseCreate(
     val name: String,
     val category: String,
@@ -18,4 +20,9 @@ class Course(
     val startDate: String,
     val endDate: String,
     val rating: String
+)
+
+@Serializable
+class Message(
+    val message: String
 )

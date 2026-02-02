@@ -57,6 +57,11 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.9.1")
             implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
+            implementation(libs.ktor.client.logging)
+            
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -99,7 +104,7 @@ android {
 }
 
 dependencies {
-    debugImplementation(compose.uiTooling)
+    debugImplementation("org.jetbrains.compose.ui:ui-tooling:1.10.0")
 }
 
 compose.desktop {

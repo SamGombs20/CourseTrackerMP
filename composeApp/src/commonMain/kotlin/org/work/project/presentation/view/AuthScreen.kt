@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.courseTracker
@@ -31,10 +32,13 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
+import org.work.project.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun AuthScreen(navController: NavController){
+    val authViewModel = remember { AuthViewModel() }
     var isSignUp by remember { mutableStateOf(false) }
+    val message by authViewModel.message.collectAsStateWithLifecycle()
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -89,6 +93,8 @@ fun AuthScreen(navController: NavController){
             }
         }
 
-
+        if (message.isNotEmpty()){
+            Text(message)
+        }
     }
 }
