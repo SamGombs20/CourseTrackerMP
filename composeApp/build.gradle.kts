@@ -59,7 +59,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
-
+            implementation("io.ktor:ktor-client-cio:3.4.0")
             implementation(libs.ktor.client.logging)
             
         }
@@ -69,7 +69,6 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
-            implementation("io.ktor:ktor-client-okhttp")
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

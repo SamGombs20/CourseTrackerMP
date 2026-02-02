@@ -13,7 +13,7 @@ import org.work.project.model.Message
 object AuthApi{
     private const val API_URL = "https://course-tracker-fast-api.vercel.app/"
     private val json = Json { ignoreUnknownKeys=true }
-    private val  client = HttpClient {
+    private val  client = HttpClient(CIO) {
         install(Logging){
             level = LogLevel.INFO
         }
