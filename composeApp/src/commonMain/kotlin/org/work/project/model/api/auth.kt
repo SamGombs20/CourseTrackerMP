@@ -9,8 +9,11 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
+import io.ktor.http.Parameters
 import io.ktor.http.contentType
+import io.ktor.http.formUrlEncode
 import io.ktor.http.isSuccess
 import io.ktor.http.parametersOf
 import io.ktor.serialization.kotlinx.json.json
@@ -34,17 +37,21 @@ object AuthApi{
     suspend fun getMessage(): Message{
         return client.get(API_URL).body()
     }
-    suspend fun login(username: String, password: String): Result<Token> = runCatching {
-        val response = client.post("$BASE_URL/auth/login"){
+
+    suspend fun signIn(username:String, password: String): Result<Token> = runCatching{
+        val response = client.post("$BASE_URL/auth/login") {
             contentType(ContentType.Application.FormUrlEncoded)
-            setBody(parametersOf(
-                "username" to listOf(username),
-                "password" to listOf(password)
-            ))
+
+            setBody(
+                Parameters.build {
+                    append("username", username)
+                    append("password", password)
+                }.formUrlEncode()
+            )
         }
-        if(!response.status.isSuccess()){
-            throw Exception("Login failed")
+        if (!response.status.isSuccess()){
+            throw Exception("Invalid credentials")
         }
         response.body<Token>()
-    }
+        }
 }

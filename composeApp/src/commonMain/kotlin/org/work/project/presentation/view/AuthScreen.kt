@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +31,7 @@ import coursetrackermp.composeapp.generated.resources.courseTracker
 import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.model.api.AuthApi
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.AuthViewModel
@@ -39,7 +41,9 @@ fun AuthScreen(navController: NavController){
     val authViewModel = remember { AuthViewModel() }
     var isSignUp by remember { mutableStateOf(false) }
     val message by authViewModel.message.collectAsStateWithLifecycle()
-    authViewModel.getMessage()
+    LaunchedEffect(Unit){
+        authViewModel.getMessage()
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

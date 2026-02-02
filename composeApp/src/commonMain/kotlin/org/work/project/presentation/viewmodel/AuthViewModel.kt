@@ -16,6 +16,10 @@ class AuthViewModel: ViewModel() {
     val token: StateFlow<Token?> = _token.asStateFlow()
     val message: StateFlow<String> = _message.asStateFlow()
 
+    private val _logIn = MutableStateFlow(false)
+    val logIn: StateFlow<Boolean> = _logIn.asStateFlow()
+
+
     fun getMessage(){
         viewModelScope.launch {
             val result = AuthApi.getMessage()
@@ -25,9 +29,10 @@ class AuthViewModel: ViewModel() {
     fun signIn(username:String, password: String){
         viewModelScope.launch {
 //            val user = UserLogin(username, password)
-            val result = AuthApi.login(username, password)
+            val result = AuthApi.signIn(username, password)
             result.onSuccess {
-                _token.value = result.getOrNull()
+                _token.value = it
+                _logIn.value = true
             }
         }
     }

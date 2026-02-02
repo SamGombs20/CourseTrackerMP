@@ -2,7 +2,6 @@ package org.work.project.presentation.view
 
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.log_in
 import coursetrackermp.composeapp.generated.resources.log_in_title
@@ -56,7 +54,7 @@ fun LogInScreen(
     var password by remember { mutableStateOf("") }
     var usernameError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
-    val token by authViewModel.token.collectAsStateWithLifecycle()
+    val login by authViewModel.logIn.collectAsStateWithLifecycle()
     fun validateInputs(): Boolean{
         var isValid = true
         if(username.isEmpty()){
@@ -142,13 +140,13 @@ fun LogInScreen(
                 onClick = {
                     if(validateInputs()){
                         authViewModel.signIn(username, password)
-//                        if (token!=null){
-//                            navController.navigate(Screen.Main.route){
-//                                popUpTo(Screen.Login.route){
-//                                    inclusive = true
-//                                }
-//                            }
-//                        }
+                        if (login){
+                            navController.navigate(Screen.Main.route){
+                                popUpTo(Screen.Login.route){
+                                    inclusive = true
+                                }
+                            }
+                        }
                     }
                 },
                 modifier = Modifier.fillMaxWidth(0.9f),
