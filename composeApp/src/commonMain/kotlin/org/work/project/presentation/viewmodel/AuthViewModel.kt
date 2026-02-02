@@ -7,15 +7,28 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.work.project.model.api.AuthApi
+import org.work.project.model.user.Token
+import org.work.project.model.user.UserLogin
 
 class AuthViewModel: ViewModel() {
     private val _message = MutableStateFlow("")
+    private val _token = MutableStateFlow<Token?>(null)
+    val token: StateFlow<Token?> = _token.asStateFlow()
     val message: StateFlow<String> = _message.asStateFlow()
 
     fun getMessage(){
         viewModelScope.launch {
             val result = AuthApi.getMessage()
             _message.value = result.message
+        }
+    }
+    fun signIn(username:String, password: String){
+        viewModelScope.launch {
+            val user = UserLogin(username, password)
+            val result = AuthApi.login(user)
+            result.onSuccess {
+                _token.value = result.getOrNull()
+            }
         }
     }
 }

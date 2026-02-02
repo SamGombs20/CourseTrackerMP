@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coursetrackermp.composeapp.generated.resources.Res
@@ -43,17 +44,19 @@ import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.components.ErrorText
 import org.work.project.presentation.ui.secondaryColor
+import org.work.project.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun LogInScreen(
     navController: NavController,
-    pageToggle:(Boolean)-> Unit
+    pageToggle:(Boolean)-> Unit,
+    authViewModel: AuthViewModel
 ){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var usernameError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
-
+    val token by authViewModel.token.collectAsStateWithLifecycle()
     fun validateInputs(): Boolean{
         var isValid = true
         if(username.isEmpty()){
@@ -138,9 +141,12 @@ fun LogInScreen(
             TextButton(
                 onClick = {
                     if(validateInputs()){
-                        navController.navigate(Screen.Main.route){
-                            popUpTo(Screen.Login.route){
-                                inclusive = true
+                        authViewModel.signIn(username, password)
+                        if (token!=null){
+                            navController.navigate(Screen.Main.route){
+                                popUpTo(Screen.Login.route){
+                                    inclusive = true
+                                }
                             }
                         }
                     }
