@@ -35,12 +35,9 @@ object AuthApi{
         return client.get(API_URL).body()
     }
     suspend fun login(user: UserLogin): Result<Token> = runCatching {
-        val response = client.post("$BASE_URL/auth/login"){
-            contentType(ContentType.Application.FormUrlEncoded)
-            setBody(parametersOf(
-                "username" to listOf(user.username),
-                "password" to listOf(user.password)
-            ))
+        val response = client.post("https://course-tracker-fast-api.vercel.app/api/v1/auth/login"){
+            contentType(ContentType.Application.Json)
+            setBody(user)
         }
         if(!response.status.isSuccess()){
             throw Exception("Login failed")
