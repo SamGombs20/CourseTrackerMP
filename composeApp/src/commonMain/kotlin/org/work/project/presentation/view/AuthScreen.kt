@@ -88,9 +88,9 @@ fun AuthScreen(navController: NavController){
                 }
             }
             else{
-                LogInScreen(navController) {
-                    isSignUp=it
-                }
+                LogInScreen(navController, {
+                    isSignUp = it
+                }, authViewModel)
             }
         }
 
