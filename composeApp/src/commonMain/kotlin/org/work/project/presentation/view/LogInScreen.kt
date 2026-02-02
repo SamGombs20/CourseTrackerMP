@@ -142,13 +142,13 @@ fun LogInScreen(
                 onClick = {
                     if(validateInputs()){
                         authViewModel.signIn(username, password)
-                        if (token!=null){
-                            navController.navigate(Screen.Main.route){
-                                popUpTo(Screen.Login.route){
-                                    inclusive = true
-                                }
-                            }
-                        }
+//                        if (token!=null){
+//                            navController.navigate(Screen.Main.route){
+//                                popUpTo(Screen.Login.route){
+//                                    inclusive = true
+//                                }
+//                            }
+//                        }
                     }
                 },
                 modifier = Modifier.fillMaxWidth(0.9f),
