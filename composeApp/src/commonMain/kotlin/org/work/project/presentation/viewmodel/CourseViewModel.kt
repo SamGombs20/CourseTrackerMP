@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.work.project.model.Course
+import org.work.project.model.course.Course
 import org.work.project.model.courses
 
 class CourseViewModel: ViewModel() {

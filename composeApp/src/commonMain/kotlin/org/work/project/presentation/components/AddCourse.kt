@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.calendar
 import coursetrackermp.composeapp.generated.resources.category
@@ -35,14 +34,13 @@ import coursetrackermp.composeapp.generated.resources.close
 import coursetrackermp.composeapp.generated.resources.description
 import coursetrackermp.composeapp.generated.resources.end_date
 import coursetrackermp.composeapp.generated.resources.name
-import coursetrackermp.composeapp.generated.resources.name_error
 import coursetrackermp.composeapp.generated.resources.rating
 import coursetrackermp.composeapp.generated.resources.save
 import coursetrackermp.composeapp.generated.resources.start_date
 import coursetrackermp.composeapp.generated.resources.status
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.work.project.model.Course
+import org.work.project.model.course.Course
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
 import org.work.project.utils.convertMillisToDate

@@ -17,7 +17,7 @@ import coursetrackermp.composeapp.generated.resources.name
 import coursetrackermp.composeapp.generated.resources.rating
 import coursetrackermp.composeapp.generated.resources.status
 import org.jetbrains.compose.resources.stringResource
-import org.work.project.model.Course
+import org.work.project.model.course.Course
 import org.work.project.utils.getStatusBackground
 import org.work.project.utils.getStatusColor
 

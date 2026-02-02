@@ -1,4 +1,4 @@
-package org.work.project.model
+package org.work.project.model.course
 
 import kotlinx.serialization.Serializable
 

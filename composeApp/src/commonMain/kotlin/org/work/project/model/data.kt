@@ -1,5 +1,7 @@
 package org.work.project.model
 
+import org.work.project.model.course.Course
+
 val courses = listOf(
     Course(
         id = "C001",

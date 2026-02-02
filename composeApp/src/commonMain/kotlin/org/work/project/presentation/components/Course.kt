@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
-import org.work.project.model.Course
+import org.work.project.model.course.Course
 import org.work.project.presentation.ui.lightGray
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.utils.getStatusBackground

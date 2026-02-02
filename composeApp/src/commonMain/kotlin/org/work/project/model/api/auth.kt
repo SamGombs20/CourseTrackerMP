@@ -9,7 +9,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import org.work.project.model.Message
+import org.work.project.model.course.Message
 
 object AuthApi{
     private const val API_URL = "https://course-tracker-fast-api.vercel.app/"
