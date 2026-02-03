@@ -43,7 +43,6 @@ class AuthViewModel: ViewModel() {
             when{
                 result.isSuccess -> {
                     _token.value = result.getOrNull()!!
-
                     _uiEvents.send(SignInUiEvent.NavigateToHome)
                 }
                 else->{
