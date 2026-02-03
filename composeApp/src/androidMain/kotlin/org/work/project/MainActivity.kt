@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import org.work.project.di.initKoin
 
 @SuppressLint("StaticFieldLeak")
 object AndroidSettingsContext {
@@ -17,6 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        initKoin()
         AndroidSettingsContext.context = applicationContext
         setContent {
             App()

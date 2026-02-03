@@ -13,35 +13,38 @@ import org.work.project.model.api.AuthApi
 import org.work.project.model.user.SignInUiEvent
 import org.work.project.model.user.SignInUiState
 import org.work.project.model.user.Token
+import org.work.project.utils.AuthTokenStorage
 
 
-class AuthViewModel: ViewModel() {
+class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val authApi: AuthApi): ViewModel() {
     private val _message = MutableStateFlow("")
     private val _uiState = MutableStateFlow(SignInUiState())
     val uiState: StateFlow<SignInUiState> = _uiState.asStateFlow()
 
     private val _uiEvents = Channel<SignInUiEvent>(Channel.BUFFERED)
+
+    private val _token = MutableStateFlow("")
+    val token: StateFlow<String> =_token.asStateFlow()
     val uiEvents = _uiEvents.receiveAsFlow()
-    private val _token = MutableStateFlow<Token?>(null)
-    val token: StateFlow<Token?> = _token.asStateFlow()
     val message: StateFlow<String> = _message.asStateFlow()
 
 
 
     fun getMessage(){
         viewModelScope.launch {
-            val result = AuthApi.getMessage()
+            val result = authApi.getMessage()
             _message.value = result.message
         }
     }
     fun signIn(username:String, password: String){
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
-            val result = AuthApi.signIn(username, password)
+            val result = authApi.signIn(username, password)
             _uiState.update { it.copy(isLoading = false) }
             when{
                 result.isSuccess -> {
-                    _token.value = result.getOrNull()!!
+                    val token = result.getOrNull()!!
+                    tokenStorage.saveTokens(token.accessToken, token.refreshToken)
                     _uiEvents.send(SignInUiEvent.NavigateToHome)
                 }
                 else->{
@@ -54,4 +57,5 @@ class AuthViewModel: ViewModel() {
             }
         }
     }
+
 }

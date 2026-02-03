@@ -72,9 +72,9 @@ kotlin {
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
             implementation("com.russhwolf:multiplatform-settings-coroutines:1.3.0")
             implementation(project.dependencies.platform("io.insert-koin:koin-bom:4.2.0-RC1"))
-            implementation("io.insert-koin:koin-core")
-            implementation("io.insert-koin:koin-compose")
             implementation("io.insert-koin:koin-compose-viewmodel")
+            implementation(libs.koin.core)
+            implementation(libs.koin.annotations)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

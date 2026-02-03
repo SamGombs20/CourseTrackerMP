@@ -51,7 +51,6 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavController){
-    val courseViewModel = remember { CourseViewModel() }
     var expanded by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -162,7 +161,7 @@ fun MainScreen(navController: NavController){
             Column(
                 modifier = Modifier.padding(innerPadding).background(Color.White).fillMaxSize()
             ) {
-                HomeScreen(courseViewModel)
+                HomeScreen()
             }
         }
     )

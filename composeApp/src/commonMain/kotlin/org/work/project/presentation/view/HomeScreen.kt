@@ -50,6 +50,7 @@ import coursetrackermp.composeapp.generated.resources.trash
 import coursetrackermp.composeapp.generated.resources.yes
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.presentation.components.Banner
 import org.work.project.presentation.components.ButtonWithIcon
 import org.work.project.presentation.components.Course
@@ -63,7 +64,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 
 
 @Composable
-fun HomeScreen(courseViewModel: CourseViewModel){
+fun HomeScreen(courseViewModel: CourseViewModel = koinViewModel()){
 
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }

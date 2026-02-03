@@ -41,6 +41,7 @@ import coursetrackermp.composeapp.generated.resources.sign_up
 import coursetrackermp.composeapp.generated.resources.username_text
 import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.SignInUiEvent
 import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
@@ -52,7 +53,7 @@ import org.work.project.presentation.viewmodel.AuthViewModel
 fun LogInScreen(
     navController: NavController,
     pageToggle:(Boolean)-> Unit,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel = koinViewModel()
 ){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
