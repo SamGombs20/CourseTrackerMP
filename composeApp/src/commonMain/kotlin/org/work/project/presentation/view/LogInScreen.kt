@@ -181,7 +181,7 @@ fun LogInScreen(
 
             ){
                 if (state.isLoading){
-                    CircularProgressIndicator(modifier = Modifier.size(18 .dp))
+                    CircularProgressIndicator(modifier = Modifier.size(24 .dp))
                 }
                 else{
                     Text(stringResource(Res.string.log_in))
