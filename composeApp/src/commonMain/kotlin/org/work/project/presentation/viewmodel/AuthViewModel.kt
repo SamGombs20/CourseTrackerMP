@@ -44,6 +44,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
             when{
                 result.isSuccess -> {
                     val token = result.getOrNull()!!
+                    _token.value = token.accessToken
                     tokenStorage.saveTokens(token.accessToken, token.refreshToken)
                     _uiEvents.send(SignInUiEvent.NavigateToHome)
                 }
