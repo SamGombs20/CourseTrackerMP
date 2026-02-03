@@ -13,9 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,6 +40,7 @@ import coursetrackermp.composeapp.generated.resources.sign_up
 import coursetrackermp.composeapp.generated.resources.username_text
 import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.stringResource
+import org.work.project.model.user.SignInUiEvent
 import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.components.ErrorText
@@ -54,7 +57,26 @@ fun LogInScreen(
     var password by remember { mutableStateOf("") }
     var usernameError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
-    val login by authViewModel.logIn.collectAsStateWithLifecycle()
+    val state by authViewModel.uiState.collectAsStateWithLifecycle()
+    val events by authViewModel.uiEvents.collectAsStateWithLifecycle(initialValue = null)
+    var errorMessage by remember { mutableStateOf("") }
+
+    LaunchedEffect(events){
+        when(events){
+            is SignInUiEvent.NavigateToHome->{
+                navController.navigate(Screen.Main.route){
+                    popUpTo(Screen.Login.route){
+                        inclusive = true
+                    }
+                }
+            }
+            is SignInUiEvent.ShowError -> {
+                errorMessage = (events as SignInUiEvent.ShowError).message
+            }
+            null->{}
+        }
+    }
+
     fun validateInputs(): Boolean{
         var isValid = true
         if(username.isEmpty()){
@@ -96,6 +118,7 @@ fun LogInScreen(
                 onChange = {
                     username = it
                     usernameError =""
+                    errorMessage=""
                 },
                 label = stringResource(Res.string.username_text),
                 isError = usernameError.isNotEmpty()
@@ -109,6 +132,7 @@ fun LogInScreen(
                 onChange = {
                     password = it
                     passwordError = ""
+                    errorMessage =""
                 },
                 isError = passwordError.isNotEmpty(),
                 label = stringResource(Res.string.password_text)
@@ -135,20 +159,17 @@ fun LogInScreen(
                     )
                 }
             }
+            if(errorMessage.isNotEmpty()){
+                ErrorText(errorMessage)
+            }
             Spacer(Modifier.height(16 .dp))
             TextButton(
                 onClick = {
                     if(validateInputs()){
                         authViewModel.signIn(username, password)
-                        if (login){
-                            navController.navigate(Screen.Main.route){
-                                popUpTo(Screen.Login.route){
-                                    inclusive = true
-                                }
-                            }
-                        }
                     }
                 },
+                enabled = !state.isLoading,
                 modifier = Modifier.fillMaxWidth(0.9f),
                 colors = ButtonDefaults.textButtonColors(
                     containerColor = secondaryColor,
@@ -158,7 +179,12 @@ fun LogInScreen(
 
 
             ){
-                Text(stringResource(Res.string.log_in))
+                if (state.isLoading){
+                    CircularProgressIndicator()
+                }
+                else{
+                    Text(stringResource(Res.string.log_in))
+                }
             }
         }
 

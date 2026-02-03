@@ -27,8 +27,6 @@ class AuthViewModel: ViewModel() {
     val token: StateFlow<Token?> = _token.asStateFlow()
     val message: StateFlow<String> = _message.asStateFlow()
 
-    private val _logIn = MutableStateFlow(false)
-    val logIn: StateFlow<Boolean> = _logIn.asStateFlow()
 
 
     fun getMessage(){
@@ -45,7 +43,7 @@ class AuthViewModel: ViewModel() {
             when{
                 result.isSuccess -> {
                     _token.value = result.getOrNull()!!
-                    _logIn.value = true
+
                     _uiEvents.send(SignInUiEvent.NavigateToHome)
                 }
                 else->{
