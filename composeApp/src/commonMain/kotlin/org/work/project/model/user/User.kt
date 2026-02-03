@@ -33,3 +33,11 @@ class Token(
     @SerialName("token_type")
     val tokenType: String
 )
+sealed interface SignInUiEvent{
+    data object NavigateToHome: SignInUiEvent
+    data class ShowError(val message: String): SignInUiEvent
+}
+data class SignInUiState(
+    val isLoading: Boolean=false,
+    val errorMessage:String?=null
+)
