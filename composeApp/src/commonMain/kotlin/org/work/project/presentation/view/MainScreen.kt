@@ -69,7 +69,7 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
                             color = secondaryColor
                         )
                         Text(
-                            text = "Josh",
+                            text = token.slice(0..10),
                             fontWeight = FontWeight.SemiBold
                         )
                     }
@@ -166,9 +166,7 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
                 modifier = Modifier.padding(innerPadding).background(Color.White).fillMaxSize()
             ) {
                 HomeScreen()
-                Text(
-                    text = token
-                )
+
             }
         }
     )
