@@ -55,7 +55,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 @Composable
 fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinViewModel()){
     var expanded by remember { mutableStateOf(false) }
-    val token by authViewModel.token.collectAsStateWithLifecycle()
+    val token = authViewModel.getAccessToken()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -69,7 +69,7 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
                             color = secondaryColor
                         )
                         Text(
-                            text = token.slice(0..10),
+                            text = token.takeLast(10),
                             fontWeight = FontWeight.SemiBold
                         )
                     }
