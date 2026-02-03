@@ -13,7 +13,6 @@ import org.work.project.model.api.AuthApi
 import org.work.project.model.user.SignInUiEvent
 import org.work.project.model.user.SignInUiState
 import org.work.project.model.user.Token
-import org.work.project.model.user.UserLogin
 
 
 class AuthViewModel: ViewModel() {

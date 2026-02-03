@@ -50,6 +50,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
             implementation("androidx.security:security-crypto:1.1.0-alpha06")
+            implementation("io.insert-koin:koin-android")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -69,7 +70,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
             implementation("com.russhwolf:multiplatform-settings-coroutines:1.3.0")
-            
+            implementation(project.dependencies.platform("io.insert-koin:koin-bom:4.2"))
+            implementation("io.insert-koin:koin-core")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
