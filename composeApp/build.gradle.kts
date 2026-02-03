@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
-    alias(libs.plugins.koin.compiler)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0"
 }
 

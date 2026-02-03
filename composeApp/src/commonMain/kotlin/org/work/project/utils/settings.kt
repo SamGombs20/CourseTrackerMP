@@ -3,7 +3,7 @@ package org.work.project.utils
 import com.russhwolf.settings.Settings
 
 class AuthTokenStorage(
-    private val settings: Settings
+    private val settings: Settings = Settings()
 ){
     companion object{
         private const val KEY_ACCESS_TOKEN="access_token"

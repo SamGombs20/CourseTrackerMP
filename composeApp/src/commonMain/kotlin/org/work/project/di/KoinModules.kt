@@ -8,8 +8,8 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 import org.work.project.utils.AuthTokenStorage
 
 val sharedModule = module {
-    single<AuthApi>()
-    single<AuthTokenStorage>()
-    single<AuthViewModel>()
-    single<CourseViewModel>()
+    single { AuthApi }
+    single{ AuthTokenStorage() }
+    single{ AuthViewModel(get(), get()) }
+    single{ CourseViewModel() }
 }
