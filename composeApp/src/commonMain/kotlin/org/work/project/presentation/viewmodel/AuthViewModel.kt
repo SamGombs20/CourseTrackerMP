@@ -16,7 +16,7 @@ import org.work.project.model.user.User
 import org.work.project.utils.AuthTokenStorage
 
 
-class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val authApi: AuthApi): ViewModel() {
+class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val authApi: AuthApi, private val courseViewModel: CourseViewModel): ViewModel() {
     private val _message = MutableStateFlow("")
     private val _uiState = MutableStateFlow(SignInUiState())
     val uiState: StateFlow<SignInUiState> = _uiState.asStateFlow()
@@ -48,6 +48,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
                     tokenStorage.saveTokens(token.accessToken, token.refreshToken)
                     val usr = authApi.getUser()
                     _authState.value = AuthState.Authenticated(usr)
+                    courseViewModel.getCourses()
 //                    _uiEvents.send(SignInUiEvent.NavigateToHome)
                 }
                 else->{

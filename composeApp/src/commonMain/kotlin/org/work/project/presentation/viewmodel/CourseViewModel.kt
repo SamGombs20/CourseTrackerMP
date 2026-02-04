@@ -16,10 +16,8 @@ class CourseViewModel(private val authApi: AuthApi): ViewModel() {
     private val _selectedCourse = MutableStateFlow<Course?>(null)
     val selectedCourse: StateFlow<Course?> = _selectedCourse.asStateFlow()
     val allCourses: StateFlow<List<Course>> = _allCourses.asStateFlow()
-    init {
-        setCourses()
-    }
-    fun setCourses(){
+
+    fun getCourses(){
         viewModelScope.launch {
             _allCourses.value = authApi.getCourses()
             if (!_allCourses.value.isEmpty()){
