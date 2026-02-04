@@ -46,6 +46,7 @@ import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.work.project.model.user.AuthState
 import org.work.project.model.user.SignInUiEvent
 import org.work.project.navigation.Screen
 
@@ -59,13 +60,12 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 fun MainScreen(navController: NavController, authViewModel: AuthViewModel){
     var expanded by remember { mutableStateOf(false) }
     val token = authViewModel.getAccessToken()
-    val user by authViewModel.user.collectAsStateWithLifecycle()
-
+    val authState by authViewModel.authState.collectAsStateWithLifecycle()
+    val user = (authState as? AuthState.Authenticated)?.user
     LaunchedEffect(Unit){
         authViewModel.uiEvents.collect { event ->
             when(event){
                 is SignInUiEvent.NavigateToHome -> {
-                    delay(1000)
                     navController.navigate(Screen.Login.route){
                         popUpTo(Screen.Main.route){
                             inclusive = true

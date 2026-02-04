@@ -43,3 +43,9 @@ data class SignInUiState(
     val isLoading: Boolean=false,
     val errorMessage:String?=null
 )
+sealed interface AuthState{
+    object Unauthenticated: AuthState
+    object Loading: AuthState
+    data class Authenticated(val user: User): AuthState
+    data class Error(val message: String): AuthState
+}

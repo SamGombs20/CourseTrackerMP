@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.work.project.api.AuthApi
+import org.work.project.model.user.AuthState
 import org.work.project.model.user.SignInUiEvent
 import org.work.project.model.user.SignInUiState
 import org.work.project.model.user.User
@@ -31,6 +32,8 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     private val _user = MutableStateFlow<User?>(null)
     val user: StateFlow<User?> = _user.asStateFlow()
 
+    private val _authState = MutableStateFlow<AuthState>(AuthState.Unauthenticated)
+    val authState: StateFlow<AuthState> = _authState.asStateFlow()
 
     fun getMessage(){
         viewModelScope.launch {
@@ -40,7 +43,6 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     }
     fun signIn(username:String, password: String){
         viewModelScope.launch {
-            _user.value = null
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             val result = authApi.signIn(username, password)
             _uiState.update { it.copy(isLoading = false) }
@@ -48,7 +50,8 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
                 result.isSuccess -> {
                     val token = result.getOrNull()!!
                     tokenStorage.saveTokens(token.accessToken, token.refreshToken)
-                    _user.value = authApi.getUser()
+                    val usr = authApi.getUser()
+                    _authState.value = AuthState.Authenticated(usr)
                     _uiEvents.send(SignInUiEvent.NavigateToHome)
                 }
                 else->{
@@ -68,7 +71,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     fun logOut(){
         viewModelScope.launch {
             tokenStorage.clearTokens()
-            _user.value = null
+            _authState.value = AuthState.Unauthenticated
             _uiEvents.send(SignInUiEvent.NavigateToHome)
         }
     }
