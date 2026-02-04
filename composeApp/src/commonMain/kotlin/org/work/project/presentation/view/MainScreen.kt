@@ -24,7 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,46 +36,25 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.about
 import coursetrackermp.composeapp.generated.resources.sign_out
-import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.AuthState
-import org.work.project.model.user.SignInUiEvent
-import org.work.project.navigation.Screen
 
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.AuthViewModel
-import org.work.project.presentation.viewmodel.CourseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController, authViewModel: AuthViewModel){
+fun MainScreen( authViewModel: AuthViewModel){
     var expanded by remember { mutableStateOf(false) }
     val token = authViewModel.getAccessToken()
     val authState by authViewModel.authState.collectAsStateWithLifecycle()
     val user = (authState as? AuthState.Authenticated)?.user
-    LaunchedEffect(Unit){
-        authViewModel.uiEvents.collect { event ->
-            when(event){
-                is SignInUiEvent.NavigateToHome -> {
-                    navController.navigate(Screen.Login.route){
-                        popUpTo(Screen.Main.route){
-                            inclusive = true
-                        }
-                    }
-                }
 
-                is SignInUiEvent.ShowError -> {}
-            }
-        }
-    }
     Scaffold(
         topBar = {
             TopAppBar(

@@ -46,7 +46,6 @@ import org.work.project.presentation.ui.secondaryColor
 
 @Composable
 fun RegisterScreen (
-    navController: NavController,
     pageToggle:(Boolean)-> Unit
 ){
     var firstName by remember { mutableStateOf("") }
@@ -218,11 +217,7 @@ fun RegisterScreen (
         TextButton(
             onClick = {
                 if (validateInputs()){
-                    navController.navigate(Screen.Main.route){
-                        popUpTo(Screen.Login.route){
-                            inclusive = true
-                        }
-                    }
+
                 }
             },
             modifier = Modifier.fillMaxWidth(0.9f),

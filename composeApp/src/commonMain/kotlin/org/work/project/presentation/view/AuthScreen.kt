@@ -37,7 +37,7 @@ import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.AuthViewModel
 
 @Composable
-fun AuthScreen(navController: NavController, authViewModel: AuthViewModel){
+fun AuthScreen( authViewModel: AuthViewModel){
     var isSignUp by remember { mutableStateOf(false) }
     LaunchedEffect(Unit){
         authViewModel.getMessage()
@@ -85,12 +85,12 @@ fun AuthScreen(navController: NavController, authViewModel: AuthViewModel){
 
         ) {
             if (isSignUp){
-                RegisterScreen(navController) {
+                RegisterScreen() {
                     isSignUp =it
                 }
             }
             else{
-                LogInScreen(navController, {
+                LogInScreen( {
                     isSignUp = it
                 }, authViewModel)
             }

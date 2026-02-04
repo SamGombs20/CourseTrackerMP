@@ -51,7 +51,6 @@ import org.work.project.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun LogInScreen(
-    navController: NavController,
     pageToggle:(Boolean)-> Unit,
     authViewModel: AuthViewModel
 ){
@@ -60,24 +59,8 @@ fun LogInScreen(
     var usernameError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
     val state by authViewModel.uiState.collectAsStateWithLifecycle()
-    val events by authViewModel.uiEvents.collectAsStateWithLifecycle(initialValue = null)
     var errorMessage by remember { mutableStateOf("") }
 
-    LaunchedEffect(events){
-        when(events){
-            is SignInUiEvent.NavigateToHome->{
-                navController.navigate(Screen.Main.route){
-                    popUpTo(Screen.Login.route){
-                        inclusive = true
-                    }
-                }
-            }
-            is SignInUiEvent.ShowError -> {
-                errorMessage = (events as SignInUiEvent.ShowError).message
-            }
-            null->{}
-        }
-    }
 
     fun validateInputs(): Boolean{
         var isValid = true
