@@ -32,7 +32,6 @@ import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import org.work.project.model.api.AuthApi
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.AuthViewModel
@@ -40,7 +39,6 @@ import org.work.project.presentation.viewmodel.AuthViewModel
 @Composable
 fun AuthScreen(navController: NavController, authViewModel: AuthViewModel=koinViewModel()){
     var isSignUp by remember { mutableStateOf(false) }
-    val message by authViewModel.message.collectAsStateWithLifecycle()
     LaunchedEffect(Unit){
         authViewModel.getMessage()
     }
@@ -96,10 +94,6 @@ fun AuthScreen(navController: NavController, authViewModel: AuthViewModel=koinVi
                     isSignUp = it
                 })
             }
-        }
-
-        if (message.isNotEmpty()){
-            Text(message)
         }
     }
 }

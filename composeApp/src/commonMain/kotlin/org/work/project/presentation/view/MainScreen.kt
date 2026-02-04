@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +45,7 @@ import coursetrackermp.composeapp.generated.resources.sign_out
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.work.project.model.user.SignInUiEvent
 import org.work.project.navigation.Screen
 
 import org.work.project.presentation.ui.primaryColor
@@ -56,6 +58,19 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinViewModel()){
     var expanded by remember { mutableStateOf(false) }
     val token = authViewModel.getAccessToken()
+    val event by authViewModel.uiEvents.collectAsStateWithLifecycle(initialValue = null)
+    LaunchedEffect(event){
+        when(event){
+            is SignInUiEvent.NavigateToHome -> {
+                navController.navigate(Screen.Login.route){
+                    popUpTo(Screen.Main.route){
+                        inclusive = true
+                    }
+                }
+            }
+            else -> {}
+        }
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -137,11 +152,7 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
                             contentPadding = PaddingValues(start = 2 .dp),
                             onClick = {
                                 expanded=false
-                                navController.navigate(Screen.Login.route){
-                                    popUpTo(Screen.Main.route){
-                                        inclusive = true
-                                    }
-                                }
+                                authViewModel.logOut()
                                       },
                             text = {
                                 Text(stringResource(Res.string.sign_out), fontSize = 12 .sp)

@@ -1,4 +1,4 @@
-package org.work.project.model.api
+package org.work.project.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -53,5 +53,6 @@ object AuthApi{
             throw Exception("Invalid credentials")
         }
         response.body<Token>()
-        }
+    }
+
 }

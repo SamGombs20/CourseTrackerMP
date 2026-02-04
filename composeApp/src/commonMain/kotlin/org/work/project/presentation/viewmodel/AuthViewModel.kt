@@ -9,10 +9,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.work.project.model.api.AuthApi
+import org.work.project.api.AuthApi
 import org.work.project.model.user.SignInUiEvent
 import org.work.project.model.user.SignInUiState
-import org.work.project.model.user.Token
 import org.work.project.utils.AuthTokenStorage
 
 
@@ -60,8 +59,16 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     fun getAccessToken():String{
         return tokenStorage.getAccessToken()?:""
     }
+    fun initService(){
+        viewModelScope.launch {
+            authApi.getMessage()
+        }
+    }
     fun logOut(){
-
+        viewModelScope.launch {
+            tokenStorage.clearTokens()
+            _uiEvents.send(SignInUiEvent.NavigateToHome)
+        }
     }
 
 }
