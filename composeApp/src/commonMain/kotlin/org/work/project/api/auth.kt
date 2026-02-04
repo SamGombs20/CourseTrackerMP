@@ -70,8 +70,8 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
                     )
                 }
                 sendWithoutRequest { request->
-                    request.url.encodedPath in listOf("/api/v1/auth/login", "/api/v1/auth/register", "/api/v1/users/me",
-                        "/api/v1/me/courses", "/api/v1/me/addCourse", "/api/v1/me/updateCourse", "/api/v1/me/deleteCourse")
+                    request.url.encodedPath in listOf("/auth/login", "/auth/register", "/users/me",
+                        "/me/courses", "/me/addCourse", "/me/updateCourse", "/me/deleteCourse")
                 }
             }
         }
