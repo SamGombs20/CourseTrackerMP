@@ -58,11 +58,11 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinViewModel()){
     var expanded by remember { mutableStateOf(false) }
     val token = authViewModel.getAccessToken()
-    val event by authViewModel.uiEvents.collectAsStateWithLifecycle(initialValue = null)
+    val events by authViewModel.uiEvents.collectAsStateWithLifecycle(initialValue = null)
     val user by authViewModel.user.collectAsStateWithLifecycle()
 
-    LaunchedEffect(event){
-        when(event){
+    LaunchedEffect(events, token){
+        when(events){
             is SignInUiEvent.NavigateToHome -> {
                 navController.navigate(Screen.Login.route){
                     popUpTo(Screen.Main.route){
@@ -70,7 +70,8 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
                     }
                 }
             }
-            else -> {}
+            is SignInUiEvent.ShowError -> {}
+            null -> {}
         }
     }
     Scaffold(
