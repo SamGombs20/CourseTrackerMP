@@ -11,6 +11,7 @@ class CourseCreate(
     val endDate: String,
     val rating: String
 )
+@Serializable
 class Course(
     val id: String,
     val name: String,

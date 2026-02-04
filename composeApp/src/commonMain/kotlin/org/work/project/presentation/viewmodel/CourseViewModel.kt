@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.work.project.api.AuthApi
 import org.work.project.model.course.Course
-import org.work.project.model.courses
 
-class CourseViewModel: ViewModel() {
+class CourseViewModel(private val authApi: AuthApi): ViewModel() {
     private val _allCourses = MutableStateFlow(emptyList<Course>())
     private val _filteredCourses = MutableStateFlow(emptyList<Course>())
     val courseList: StateFlow<List<Course>> = _filteredCourses.asStateFlow()
@@ -17,12 +17,15 @@ class CourseViewModel: ViewModel() {
     val selectedCourse: StateFlow<Course?> = _selectedCourse.asStateFlow()
     val allCourses: StateFlow<List<Course>> = _allCourses.asStateFlow()
     init {
-        setCourses(courses)
+        setCourses()
     }
-    fun setCourses(courses: List<Course>){
+    fun setCourses(){
         viewModelScope.launch {
-            _allCourses.value = courses
-            _filteredCourses.value = courses
+            _allCourses.value = authApi.getCourses()
+            if (!_allCourses.value.isEmpty()){
+                _filteredCourses.value = _allCourses.value
+
+            }
         }
     }
     fun addCourse(course: Course){
