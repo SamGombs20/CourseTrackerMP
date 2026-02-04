@@ -45,11 +45,13 @@ class CourseViewModel(private val authApi: AuthApi): ViewModel() {
     }
     fun editCourse(course: Course){
         viewModelScope.launch {
-            _allCourses.value.forEachIndexed { index, c->
-                if(c.id == course.id){
-                    _allCourses.value = _allCourses.value.toMutableList().apply {
-                        this[index] = course
-                    }
+            val editedCourse = authApi.editCourse(course)
+            _allCourses.value = _allCourses.value.map {
+                if (it.id==editedCourse.id){
+                    editedCourse
+                }
+                else{
+                    it
                 }
             }
             _filteredCourses.value = _allCourses.value
