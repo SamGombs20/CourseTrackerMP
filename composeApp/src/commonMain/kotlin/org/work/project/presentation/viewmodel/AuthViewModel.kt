@@ -68,6 +68,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
 
     fun logOut(){
         viewModelScope.launch {
+            _user.value = null
             tokenStorage.clearTokens()
             _uiEvents.send(SignInUiEvent.NavigateToHome)
         }
