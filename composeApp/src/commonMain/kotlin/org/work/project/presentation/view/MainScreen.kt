@@ -42,6 +42,7 @@ import androidx.navigation.NavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.about
 import coursetrackermp.composeapp.generated.resources.sign_out
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -55,7 +56,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinViewModel()){
+fun MainScreen(navController: NavController, authViewModel: AuthViewModel){
     var expanded by remember { mutableStateOf(false) }
     val token = authViewModel.getAccessToken()
     val user by authViewModel.user.collectAsStateWithLifecycle()
@@ -64,6 +65,7 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
         authViewModel.uiEvents.collect { event ->
             when(event){
                 is SignInUiEvent.NavigateToHome -> {
+                    delay(1000)
                     navController.navigate(Screen.Login.route){
                         popUpTo(Screen.Main.route){
                             inclusive = true

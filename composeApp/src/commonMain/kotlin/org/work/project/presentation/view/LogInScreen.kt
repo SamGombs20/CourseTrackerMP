@@ -53,7 +53,7 @@ import org.work.project.presentation.viewmodel.AuthViewModel
 fun LogInScreen(
     navController: NavController,
     pageToggle:(Boolean)-> Unit,
-    authViewModel: AuthViewModel = koinViewModel()
+    authViewModel: AuthViewModel
 ){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
