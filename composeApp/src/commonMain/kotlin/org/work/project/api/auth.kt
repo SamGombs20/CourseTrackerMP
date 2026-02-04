@@ -30,6 +30,7 @@ import org.work.project.model.course.CourseCreate
 import org.work.project.model.course.Message
 import org.work.project.model.user.Token
 import org.work.project.model.user.User
+import org.work.project.model.user.UserCreate
 import org.work.project.utils.AuthTokenStorage
 
 class AuthApi(private val tokenStorage: AuthTokenStorage){
@@ -70,8 +71,8 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
                     )
                 }
                 sendWithoutRequest { request->
-                    request.url.encodedPath in listOf("/auth/login", "/auth/register", "/users/me",
-                        "/me/courses", "/me/addCourse", "/me/updateCourse", "/me/deleteCourse")
+                    request.url.encodedPath in listOf("/auth/login", "/auth/register", "/api/v1/users/me",
+                        "/ap1/v1/me/courses", "/api/v1/me/addCourse", "/api/v1/me/updateCourse", "/api/v1/me/deleteCourse")
                 }
             }
         }
@@ -121,6 +122,18 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
         }
         else{
             throw Exception("Failed to get user")
+        }
+    }
+    suspend fun registerUser(user: UserCreate):User{
+        val response = client.post("$authUrl/auth/register"){
+            contentType(ContentType.Application.Json)
+            setBody(user)
+        }
+        if (response.status.isSuccess()){
+            return response.body<User>()
+        }
+        else{
+            throw Exception("Failed to register user")
         }
     }
     suspend fun getCourses():List<Course>{

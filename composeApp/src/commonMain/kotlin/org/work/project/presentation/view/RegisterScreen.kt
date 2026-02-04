@@ -8,13 +8,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coursetrackermp.composeapp.generated.resources.Res
@@ -43,10 +47,12 @@ import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.components.ErrorText
 import org.work.project.presentation.ui.secondaryColor
+import org.work.project.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun RegisterScreen (
-    pageToggle:(Boolean)-> Unit
+    pageToggle:(Boolean)-> Unit,
+    authViewModel: AuthViewModel
 ){
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
@@ -58,6 +64,13 @@ fun RegisterScreen (
     var usernameError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
     var confirmPasswordError by remember { mutableStateOf("") }
+    var loading by remember { mutableStateOf(false) }
+    val state by authViewModel.uiState.collectAsStateWithLifecycle()
+    var errorMessage by remember { mutableStateOf("") }
+    LaunchedEffect(state){
+        loading = state.isLoading
+        errorMessage = state.errorMessage?:""
+    }
 
     fun validateInputs(): Boolean{
         var isValid = true
@@ -129,6 +142,7 @@ fun RegisterScreen (
             onChange = {
                 firstName = it
                 firstNameError=""
+                errorMessage =""
             },
             isError = firstNameError.isNotEmpty(),
             label = stringResource(Res.string.first_name)
@@ -143,6 +157,7 @@ fun RegisterScreen (
             onChange = {
                 lastName = it
                 lastNameError =""
+                errorMessage=""
             },
             isError = lastNameError.isNotEmpty(),
             label = stringResource(Res.string.last_name)
@@ -157,6 +172,7 @@ fun RegisterScreen (
             onChange = {
                 username = it
                 usernameError = ""
+                errorMessage=""
             },
             isError = usernameError.isNotEmpty(),
             label = stringResource(Res.string.username_text)
@@ -171,6 +187,7 @@ fun RegisterScreen (
             onChange = {
                 password = it
                 passwordError=""
+                errorMessage =""
             },
             isError = passwordError.isNotEmpty(),
             label = stringResource(Res.string.password_text)
@@ -184,6 +201,7 @@ fun RegisterScreen (
             onChange = {
                 confirmPassword = it
                 confirmPasswordError=""
+                errorMessage=""
             },
             isError = confirmPasswordError.isNotEmpty(),
             label = stringResource(Res.string.confirm)
@@ -213,13 +231,18 @@ fun RegisterScreen (
                 )
             }
         }
+        if (errorMessage.isNotEmpty()){
+            ErrorText(errorMessage)
+        }
         Spacer(Modifier.height(4 .dp))
+
         TextButton(
             onClick = {
                 if (validateInputs()){
-
+                    authViewModel.signUp(firstName, lastName, username, password)
                 }
             },
+            enabled = !loading,
             modifier = Modifier.fillMaxWidth(0.9f),
             colors = ButtonDefaults.textButtonColors(
                 containerColor = secondaryColor,
@@ -229,7 +252,12 @@ fun RegisterScreen (
 
 
         ){
-            Text(stringResource(Res.string.register))
+            if (loading){
+                CircularProgressIndicator(modifier = Modifier.size(24 .dp))
+            }
+            else{
+                Text(stringResource(Res.string.register))
+            }
         }
     }
 }

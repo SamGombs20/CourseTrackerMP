@@ -85,9 +85,9 @@ fun AuthScreen( authViewModel: AuthViewModel){
 
         ) {
             if (isSignUp){
-                RegisterScreen() {
+                RegisterScreen( {
                     isSignUp =it
-                }
+                },authViewModel)
             }
             else{
                 LogInScreen( {
