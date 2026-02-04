@@ -10,6 +10,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
+import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
@@ -95,8 +96,13 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
             throw Exception("Failed to refresh token")
         }
     }
+
     suspend fun getUser(): User{
-        val response = client.get("$authUrl/users/me")
+        val response = client.get("$authUrl/users/me"){
+            headers{
+                append("Cache-control", "no-cache")
+            }
+        }
         if(response.status.isSuccess()){
             return response.body<User>()
         }
