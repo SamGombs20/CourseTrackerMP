@@ -137,6 +137,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel){
                 description = it
                 descriptionError=""
             },
+            singleLine = false,
             isError = descriptionError.isNotEmpty(),
             label = stringResource(Res.string.description)
         )
