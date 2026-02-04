@@ -10,6 +10,7 @@ import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.headers
@@ -25,6 +26,7 @@ import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.work.project.model.course.Course
+import org.work.project.model.course.CourseCreate
 import org.work.project.model.course.Message
 import org.work.project.model.user.Token
 import org.work.project.model.user.User
@@ -68,7 +70,8 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
                     )
                 }
                 sendWithoutRequest { request->
-                    request.url.encodedPath in listOf("/auth/login", "/auth/register")
+                    request.url.encodedPath in listOf("/api/v1/auth/login", "/api/v1/auth/register", "/api/v1/users/me",
+                        "/api/v1/me/courses", "/api/v1/me/addCourse", "/api/v1/me/updateCourse", "/api/v1/me/deleteCourse")
                 }
             }
         }
@@ -139,6 +142,30 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
         }
         else{
             throw Exception("Failed to edit course")
+        }
+    }
+    suspend fun addCourse(course: CourseCreate): Course{
+        val response = client.post("$authUrl/me/addCourse"){
+            contentType(ContentType.Application.Json)
+            setBody(course)
+        }
+        if (response.status.isSuccess()){
+            return response.body<Course>()
+        }
+        else{
+            throw Exception("Failed to add course")
+        }
+    }
+    suspend fun deleteCourse(course: Course){
+        val response = client.delete("$authUrl/me/deleteCourse/${course.id}"){
+            contentType(ContentType.Application.Json)
+            setBody(course)
+        }
+        if(response.status.isSuccess()){
+            return
+        }
+        else{
+            throw Exception("Failed to delete course")
         }
     }
 }

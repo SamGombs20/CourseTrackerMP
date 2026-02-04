@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.work.project.api.AuthApi
 import org.work.project.model.course.Course
+import org.work.project.model.course.CourseCreate
 
 class CourseViewModel(private val authApi: AuthApi): ViewModel() {
     private val _allCourses = MutableStateFlow(emptyList<Course>())
@@ -26,9 +27,10 @@ class CourseViewModel(private val authApi: AuthApi): ViewModel() {
             }
         }
     }
-    fun addCourse(course: Course){
+    fun addCourse(course: CourseCreate){
         viewModelScope.launch {
-            _allCourses.value = _allCourses.value + course
+            val newCourse = authApi.addCourse(course)
+            _allCourses.value = _allCourses.value + newCourse
             _filteredCourses.value = _allCourses.value
         }
     }
@@ -59,8 +61,8 @@ class CourseViewModel(private val authApi: AuthApi): ViewModel() {
     }
     fun deleteCourse(course: Course){
         viewModelScope.launch {
-            _allCourses.value = _allCourses.value.filter { it.id != course.id }
-            _filteredCourses.value = _allCourses.value
+            authApi.deleteCourse(course)
+            getCourses()
         }
     }
     fun filterCoursesByStatus(status:String){

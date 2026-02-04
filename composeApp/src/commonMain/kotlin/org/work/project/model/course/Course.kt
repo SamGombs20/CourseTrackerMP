@@ -2,6 +2,7 @@ package org.work.project.model.course
 
 import kotlinx.serialization.Serializable
 
+@Serializable
 class CourseCreate(
     val name: String,
     val category: String,

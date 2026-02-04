@@ -41,6 +41,7 @@ import coursetrackermp.composeapp.generated.resources.status
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.model.course.Course
+import org.work.project.model.course.CourseCreate
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.CourseViewModel
 import org.work.project.utils.convertMillisToDate
@@ -257,8 +258,7 @@ fun AddCourse(onClose:(Boolean)-> Unit, courseViewModel: CourseViewModel){
                     onClick = {
                         if(validateInputs()){
                             courseViewModel.addCourse(
-                                Course(
-                                    id = "${Random.nextInt()}",
+                                CourseCreate(
                                     name,
                                     category,
                                     description,
