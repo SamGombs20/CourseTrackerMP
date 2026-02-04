@@ -120,7 +120,7 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
         }
     }
     suspend fun getCourses():List<Course>{
-        val response = client.get("$apiUrl/me/courses")
+        val response = client.get("$authUrl/me/courses")
         if (response.status.isSuccess()){
             return response.body<List<Course>>()
         }
