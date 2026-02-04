@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.course_details
 import coursetrackermp.composeapp.generated.resources.danger
@@ -50,7 +49,6 @@ import coursetrackermp.composeapp.generated.resources.trash
 import coursetrackermp.composeapp.generated.resources.yes
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.presentation.components.Banner
 import org.work.project.presentation.components.ButtonWithIcon
 import org.work.project.presentation.components.Course
@@ -64,7 +62,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 
 
 @Composable
-fun HomeScreen(courseViewModel: CourseViewModel = koinViewModel()){
+fun HomeScreen(courseViewModel: CourseViewModel){
 
     val courses by courseViewModel.courseList.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }

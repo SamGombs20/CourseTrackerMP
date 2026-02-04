@@ -46,15 +46,14 @@ import org.work.project.model.user.AuthState
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
 import org.work.project.presentation.viewmodel.AuthViewModel
+import org.work.project.presentation.viewmodel.CourseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen( authViewModel: AuthViewModel){
+fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
     var expanded by remember { mutableStateOf(false) }
-    val token = authViewModel.getAccessToken()
     val authState by authViewModel.authState.collectAsStateWithLifecycle()
     val user = (authState as? AuthState.Authenticated)?.user
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -160,7 +159,7 @@ fun MainScreen( authViewModel: AuthViewModel){
             Column(
                 modifier = Modifier.padding(innerPadding).background(Color.White).fillMaxSize()
             ) {
-                HomeScreen()
+                HomeScreen(courseViewModel)
 
             }
         }

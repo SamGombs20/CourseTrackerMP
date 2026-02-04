@@ -12,16 +12,19 @@ import org.work.project.model.user.AuthState
 import org.work.project.presentation.view.AuthScreen
 import org.work.project.presentation.view.MainScreen
 import org.work.project.presentation.viewmodel.AuthViewModel
+import org.work.project.presentation.viewmodel.CourseViewModel
 
 
 @Composable
 fun RootNavigation(){
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = koinViewModel()
+    val courseViewModel: CourseViewModel = koinViewModel()
     val authState  by authViewModel.authState.collectAsStateWithLifecycle()
     LaunchedEffect(authState){
         when(authState){
             is AuthState.Authenticated -> {
+                courseViewModel.getCourses()
                 navController.navigate(Screen.Main.route){
                     popUpTo(0){
                         inclusive=true
@@ -52,7 +55,7 @@ fun RootNavigation(){
 //            }
 //        }
         composable(Screen.Main.route) {
-            MainScreen(authViewModel)
+            MainScreen(authViewModel, courseViewModel)
         }
     }
 }

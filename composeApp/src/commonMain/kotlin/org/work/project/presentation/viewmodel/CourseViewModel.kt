@@ -32,6 +32,12 @@ class CourseViewModel(private val authApi: AuthApi): ViewModel() {
             _filteredCourses.value = _allCourses.value
         }
     }
+    fun resetCourses(){
+        viewModelScope.launch {
+            _allCourses.value = emptyList()
+            _filteredCourses.value = emptyList()
+        }
+    }
     fun setSelectedCourse(course: Course?){
         viewModelScope.launch {
             _selectedCourse.value = course
