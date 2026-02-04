@@ -60,7 +60,17 @@ fun LogInScreen(
     var passwordError by remember { mutableStateOf("") }
     val state by authViewModel.uiState.collectAsStateWithLifecycle()
     var errorMessage by remember { mutableStateOf("") }
+    val events by authViewModel.event.collectAsStateWithLifecycle(initialValue = null)
 
+    LaunchedEffect(events){
+        when(events){
+            SignInUiEvent.NavigateToHome -> {}
+            is SignInUiEvent.ShowError -> {
+                errorMessage = (events as SignInUiEvent.ShowError).message
+            }
+            null -> {}
+        }
+    }
     fun validateInputs(): Boolean{
         var isValid = true
         if(username.isEmpty()){

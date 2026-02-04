@@ -6,6 +6,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.work.project.api.AuthApi
@@ -22,7 +23,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     val uiState: StateFlow<SignInUiState> = _uiState.asStateFlow()
 
     private val _uiEvents = Channel<SignInUiEvent>(Channel.BUFFERED)
-
+    val event = _uiEvents.receiveAsFlow()
 
     private val _user = MutableStateFlow<User?>(null)
     val user: StateFlow<User?> = _user.asStateFlow()
