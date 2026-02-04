@@ -61,7 +61,6 @@ fun LogInScreen(
     val state by authViewModel.uiState.collectAsStateWithLifecycle()
     var errorMessage by remember { mutableStateOf("") }
 
-
     fun validateInputs(): Boolean{
         var isValid = true
         if(username.isEmpty()){
