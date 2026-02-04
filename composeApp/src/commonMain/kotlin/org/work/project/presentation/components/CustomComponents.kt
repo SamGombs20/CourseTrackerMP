@@ -36,6 +36,7 @@ fun CustomTextField(
     onChange:(String)-> Unit,
     label: String,
     modifier: Modifier = Modifier,
+    singleLine: Boolean = true,
     readOnly: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null
 ){
@@ -46,6 +47,7 @@ fun CustomTextField(
             modifier =modifier,
             value = value,
             label ={Text(label)},
+            singleLine = singleLine,
             textStyle = TextStyle(
                 fontSize = 14 .sp
             ),
