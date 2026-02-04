@@ -19,7 +19,6 @@ import io.ktor.http.encodedPath
 import io.ktor.http.formUrlEncode
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.atomicfu.TraceBase.None.append
 import kotlinx.serialization.json.Json
 import org.work.project.model.course.Message
 import org.work.project.model.user.Token
