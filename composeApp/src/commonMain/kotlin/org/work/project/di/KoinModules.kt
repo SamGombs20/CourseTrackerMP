@@ -7,7 +7,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 import org.work.project.utils.AuthTokenStorage
 
 val sharedModule = module {
-    single { AuthApi }
+    single { AuthApi(get()) }
     single{ AuthTokenStorage() }
     single{ AuthViewModel(get(), get()) }
     single{ CourseViewModel() }

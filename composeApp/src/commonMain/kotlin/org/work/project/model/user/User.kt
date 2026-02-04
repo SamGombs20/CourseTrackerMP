@@ -12,10 +12,12 @@ class UserCreate(
 )
 @Serializable
 class User(
+
     val id: String,
     val firstName: String,
     val lastName: String,
     val username: String,
+    @SerialName("created_at")
     val createdAt: String
 )
 @Serializable

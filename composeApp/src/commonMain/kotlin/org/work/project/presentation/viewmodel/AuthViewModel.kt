@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import org.work.project.api.AuthApi
 import org.work.project.model.user.SignInUiEvent
 import org.work.project.model.user.SignInUiState
+import org.work.project.model.user.User
 import org.work.project.utils.AuthTokenStorage
 
 
@@ -27,6 +28,8 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     val uiEvents = _uiEvents.receiveAsFlow()
     val message: StateFlow<String> = _message.asStateFlow()
 
+    private val _user = MutableStateFlow<User?>(null)
+    val user: StateFlow<User?> = _user.asStateFlow()
 
 
     fun getMessage(){
@@ -45,6 +48,9 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
                     val token = result.getOrNull()!!
                     tokenStorage.saveTokens(token.accessToken, token.refreshToken)
                     _uiEvents.send(SignInUiEvent.NavigateToHome)
+                    if (tokenStorage.getAccessToken()!=null){
+                        _user.value = authApi.getUser()
+                    }
                 }
                 else->{
                     val msg = when{
@@ -59,11 +65,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     fun getAccessToken():String{
         return tokenStorage.getAccessToken()?:""
     }
-    fun initService(){
-        viewModelScope.launch {
-            authApi.getMessage()
-        }
-    }
+
     fun logOut(){
         viewModelScope.launch {
             tokenStorage.clearTokens()

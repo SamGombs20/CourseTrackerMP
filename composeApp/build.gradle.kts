@@ -74,6 +74,7 @@ kotlin {
             implementation("io.insert-koin:koin-compose-viewmodel")
             implementation(libs.koin.core)
             implementation(libs.koin.annotations)
+            implementation("io.ktor:ktor-client-auth:3.4.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

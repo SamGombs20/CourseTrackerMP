@@ -59,6 +59,8 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
     var expanded by remember { mutableStateOf(false) }
     val token = authViewModel.getAccessToken()
     val event by authViewModel.uiEvents.collectAsStateWithLifecycle(initialValue = null)
+    val user by authViewModel.user.collectAsStateWithLifecycle()
+
     LaunchedEffect(event){
         when(event){
             is SignInUiEvent.NavigateToHome -> {
@@ -131,7 +133,7 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel= koinV
 //                            leadingIcon = {
 //                            }
 //                        )
-                        Text("Joshua Omondi", fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                        Text("${user?.firstName} ${user?.lastName}", fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                         Spacer(Modifier.height(24 .dp))
                         HorizontalDivider(color = primaryColor, modifier = Modifier.height(8 .dp))
                         DropdownMenuItem(
