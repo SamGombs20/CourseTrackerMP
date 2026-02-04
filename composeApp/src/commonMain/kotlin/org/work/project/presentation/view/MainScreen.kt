@@ -68,7 +68,7 @@ fun MainScreen( authViewModel: AuthViewModel){
                             color = secondaryColor
                         )
                         Text(
-                            text = token.takeLast(10),
+                            text = user?.firstName?:"",
                             fontWeight = FontWeight.SemiBold
                         )
                     }
@@ -92,7 +92,7 @@ fun MainScreen( authViewModel: AuthViewModel){
                             contentAlignment = Alignment.Center
                         ){
                             Text(
-                                text = "J",
+                                text = "${user?.firstName?.first()?:"C"}",
                                 color = Color.White,
                                 textAlign = TextAlign.Center
                             )
