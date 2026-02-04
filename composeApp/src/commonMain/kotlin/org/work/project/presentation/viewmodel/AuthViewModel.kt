@@ -40,6 +40,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     }
     fun signIn(username:String, password: String){
         viewModelScope.launch {
+            _user.value = null
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             val result = authApi.signIn(username, password)
             _uiState.update { it.copy(isLoading = false) }
@@ -47,10 +48,8 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
                 result.isSuccess -> {
                     val token = result.getOrNull()!!
                     tokenStorage.saveTokens(token.accessToken, token.refreshToken)
+                    _user.value = authApi.getUser()
                     _uiEvents.send(SignInUiEvent.NavigateToHome)
-                    if (tokenStorage.getAccessToken()!=null){
-                        _user.value = authApi.getUser()
-                    }
                 }
                 else->{
                     val msg = when{
@@ -68,8 +67,8 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
 
     fun logOut(){
         viewModelScope.launch {
-            _user.value = null
             tokenStorage.clearTokens()
+            _user.value = null
             _uiEvents.send(SignInUiEvent.NavigateToHome)
         }
     }
