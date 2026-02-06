@@ -174,6 +174,7 @@ fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
                     onDismissRequest = {
                         showAbout = !showAbout
                     },
+                    containerColor = Color.White,
                     dismissButton = {
                         TextButton(
                             onClick = {
@@ -185,11 +186,7 @@ fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
                             )
                         }
                     },
-                    title = {
-                        Text(
-                            text = stringResource(Res.string.about)
-                        )
-                    },
+//
                     text = {
                         Text(
                             text = stringResource(Res.string.about_text)
@@ -198,7 +195,8 @@ fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
                     icon = {
                         Image(
                             painter = painterResource(Res.drawable.courseTracker),
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.size(56 .dp)
                         )
                     },
                     confirmButton = {},
