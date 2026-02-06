@@ -12,6 +12,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.AuthState
 import org.work.project.presentation.view.AuthScreen
 import org.work.project.presentation.view.MainScreen
+import org.work.project.presentation.view.SplashScreen
 import org.work.project.presentation.viewmodel.AuthViewModel
 import org.work.project.presentation.viewmodel.CourseViewModel
 
@@ -45,8 +46,11 @@ fun RootNavigation(){
     }
     NavHost(
         navController = navController,
-        startDestination = Screen.Login.route
+        startDestination = Screen.Splash.route
     ){
+        composable(Screen.Splash.route) {
+            SplashScreen(navController)
+        }
         composable(Screen.Login.route) {
             AuthScreen( authViewModel)
         }
