@@ -25,7 +25,6 @@ fun RootNavigation(){
     LaunchedEffect(authState){
         when(authState){
             is AuthState.Authenticated -> {
-                delay(1000)
                 courseViewModel.getCourses()
                 navController.navigate(Screen.Main.route){
                     popUpTo(0){

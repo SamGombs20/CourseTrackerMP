@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +37,7 @@ fun CustomTextField(
     onChange:(String)-> Unit,
     label: String,
     modifier: Modifier = Modifier,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     singleLine: Boolean = true,
     readOnly: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null
@@ -53,6 +55,7 @@ fun CustomTextField(
             ),
             isError = isError,
             readOnly = readOnly,
+            visualTransformation = visualTransformation,
             onValueChange = onChange,
             shape = RoundedCornerShape(16 .dp),
             trailingIcon = trailingIcon

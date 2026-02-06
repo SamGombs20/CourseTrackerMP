@@ -15,6 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -28,6 +30,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -39,7 +43,10 @@ import coursetrackermp.composeapp.generated.resources.no_account
 import coursetrackermp.composeapp.generated.resources.password_text
 import coursetrackermp.composeapp.generated.resources.sign_up
 import coursetrackermp.composeapp.generated.resources.username_text
+import coursetrackermp.composeapp.generated.resources.visibility
+import coursetrackermp.composeapp.generated.resources.visibility_off
 import coursetrackermp.composeapp.generated.resources.welcome
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.SignInUiEvent
@@ -61,6 +68,7 @@ fun LogInScreen(
     val state by authViewModel.uiState.collectAsStateWithLifecycle()
     var errorMessage by remember { mutableStateOf("") }
     val events by authViewModel.event.collectAsStateWithLifecycle(initialValue = null)
+    var isPasswordHidden by remember { mutableStateOf(true) }
 
     LaunchedEffect(events){
         when(events){
@@ -127,6 +135,20 @@ fun LogInScreen(
                     password = it
                     passwordError = ""
                     errorMessage =""
+                },
+                visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+                trailingIcon = {
+                    val icon = if (isPasswordHidden) Res.drawable.visibility_off else Res.drawable.visibility
+                    IconButton(
+                        onClick = {
+                            isPasswordHidden = !isPasswordHidden
+                        }
+                    ){
+                        Icon(
+                            painter = painterResource(icon),
+                            contentDescription = null
+                        )
+                    }
                 },
                 isError = passwordError.isNotEmpty(),
                 label = stringResource(Res.string.password_text)
