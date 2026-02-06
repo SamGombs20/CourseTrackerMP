@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -33,6 +34,7 @@ import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.navigation.Screen
+import org.work.project.presentation.ui.primaryColor
 
 @Composable
 fun SplashScreen(navController: NavController) {
@@ -49,7 +51,7 @@ fun SplashScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(Color.White),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -77,7 +79,7 @@ fun SplashScreen(navController: NavController) {
                     text = stringResource(Res.string.splash_text),
                     fontStyle = FontStyle.Italic,
                     style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.primary
+                    color = primaryColor
                 )
             }
         }

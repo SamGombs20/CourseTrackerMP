@@ -36,7 +36,7 @@ fun RootNavigation(){
             is AuthState.Error -> {}
             AuthState.Loading -> {}
             AuthState.Unauthenticated -> {
-                navController.navigate(Screen.Login.route){
+                navController.navigate(Screen.Splash.route){
                     popUpTo(0){
                         inclusive = true
                     }
