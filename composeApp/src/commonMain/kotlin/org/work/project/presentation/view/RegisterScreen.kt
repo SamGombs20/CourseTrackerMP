@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -26,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -42,6 +45,9 @@ import coursetrackermp.composeapp.generated.resources.password_text
 import coursetrackermp.composeapp.generated.resources.register
 import coursetrackermp.composeapp.generated.resources.sign_in
 import coursetrackermp.composeapp.generated.resources.username_text
+import coursetrackermp.composeapp.generated.resources.visibility
+import coursetrackermp.composeapp.generated.resources.visibility_off
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
@@ -67,6 +73,8 @@ fun RegisterScreen (
     var loading by remember { mutableStateOf(false) }
     val state by authViewModel.uiState.collectAsStateWithLifecycle()
     var errorMessage by remember { mutableStateOf("") }
+    var isPasswordHidden by remember { mutableStateOf(true) }
+    var isConfirmPasswordHidden by remember { mutableStateOf(true) }
     LaunchedEffect(state){
         loading = state.isLoading
         errorMessage = state.errorMessage?:""
@@ -189,6 +197,21 @@ fun RegisterScreen (
                 passwordError=""
                 errorMessage =""
             },
+            visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+            trailingIcon = {
+                val icon = if (isPasswordHidden) Res.drawable.visibility_off else Res.drawable.visibility
+
+                TextButton(
+                    onClick = {
+                        isPasswordHidden = !isPasswordHidden
+                    }
+                ){
+                    Icon(
+                        painter = painterResource(icon),
+                        contentDescription = null
+                    )
+                }
+            },
             isError = passwordError.isNotEmpty(),
             label = stringResource(Res.string.password_text)
         )
@@ -202,6 +225,21 @@ fun RegisterScreen (
                 confirmPassword = it
                 confirmPasswordError=""
                 errorMessage=""
+            },
+            visualTransformation = if(isConfirmPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+            trailingIcon = {
+                val icon = if(isConfirmPasswordHidden) Res.drawable.visibility_off else Res.drawable.visibility
+
+                TextButton(
+                    onClick = {
+                        isConfirmPasswordHidden = !isConfirmPasswordHidden
+                    }
+                ){
+                    Icon(
+                        painter = painterResource(icon),
+                        contentDescription = null
+                    )
+                }
             },
             isError = confirmPasswordError.isNotEmpty(),
             label = stringResource(Res.string.confirm)
