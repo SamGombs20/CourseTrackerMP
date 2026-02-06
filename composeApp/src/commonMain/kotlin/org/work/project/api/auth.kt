@@ -37,7 +37,7 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
     private val apiUrl = "https://course-tracker-fast-api.vercel.app"
     private val authUrl = "$apiUrl/api/v1"
     private val json = Json { ignoreUnknownKeys=true }
-     val  client = HttpClient(CIO) {
+    private val client = HttpClient(CIO) {
         install(Logging){
             level = LogLevel.INFO
         }
@@ -70,14 +70,18 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
                         refreshToken = newToken.refreshToken
                     )
                 }
-                sendWithoutRequest { request->
-                    request.url.encodedPath in listOf("/auth/login", "/auth/register", "/api/v1/users/me",
-                        "/ap1/v1/me/courses", "/api/v1/me/addCourse", "/api/v1/me/updateCourse", "/api/v1/me/deleteCourse")
+                cacheTokens = false
+                sendWithoutRequest { request ->
+                    request.url.encodedPath in listOf(
+                        "/auth/login", "/auth/register", "/api/v1/users/me",
+                        "/api/v1/me/courses", "/api/v1/me/addCourse"
+                    )
                 }
             }
         }
 
     }
+
     suspend fun getMessage(): Message{
         return client.get(apiUrl).body()
     }
@@ -112,7 +116,7 @@ class AuthApi(private val tokenStorage: AuthTokenStorage){
     }
 
     suspend fun getUser(): User{
-        val response = client.get("$authUrl/users/me"){
+        val response = client.get("https://course-tracker-fast-api.vercel.app/api/v1/users/me"){
             headers{
                 append("Cache-control", "no-cache")
             }

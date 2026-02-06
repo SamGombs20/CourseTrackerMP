@@ -41,7 +41,6 @@ import coursetrackermp.composeapp.generated.resources.about
 import coursetrackermp.composeapp.generated.resources.sign_out
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.work.project.model.user.AuthState
 
 import org.work.project.presentation.ui.primaryColor
 import org.work.project.presentation.ui.secondaryColor
@@ -52,8 +51,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 @Composable
 fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
     var expanded by remember { mutableStateOf(false) }
-    val authState by authViewModel.authState.collectAsStateWithLifecycle()
-    val user = (authState as? AuthState.Authenticated)?.user
+    val user by authViewModel.user.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             TopAppBar(

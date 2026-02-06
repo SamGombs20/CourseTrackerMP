@@ -7,6 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.delay
 import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.AuthState
 import org.work.project.presentation.view.AuthScreen
@@ -24,6 +25,7 @@ fun RootNavigation(){
     LaunchedEffect(authState){
         when(authState){
             is AuthState.Authenticated -> {
+                delay(1000)
                 courseViewModel.getCourses()
                 navController.navigate(Screen.Main.route){
                     popUpTo(0){
