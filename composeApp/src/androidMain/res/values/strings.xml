@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CourseTrackerMP</string>
+    <string name="app_name">CourseTracker</string>
     <string name="log_in">Sign in to your account</string>
 </resources>

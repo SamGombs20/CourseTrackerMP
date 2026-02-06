@@ -1,3 +1,4 @@
+@file:JvmName("AndroidCommonKt")
 package org.work.project.utils
 
 import androidx.security.crypto.EncryptedSharedPreferences
