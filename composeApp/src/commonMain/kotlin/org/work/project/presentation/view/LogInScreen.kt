@@ -16,7 +16,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -35,7 +34,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.log_in
 import coursetrackermp.composeapp.generated.resources.log_in_title
@@ -48,9 +46,7 @@ import coursetrackermp.composeapp.generated.resources.visibility_off
 import coursetrackermp.composeapp.generated.resources.welcome
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.SignInUiEvent
-import org.work.project.navigation.Screen
 import org.work.project.presentation.components.CustomTextField
 import org.work.project.presentation.components.ErrorText
 import org.work.project.presentation.ui.secondaryColor
@@ -139,7 +135,8 @@ fun LogInScreen(
                 visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
                 trailingIcon = {
                     val icon = if (isPasswordHidden) Res.drawable.visibility_off else Res.drawable.visibility
-                    IconButton(
+
+                    TextButton(
                         onClick = {
                             isPasswordHidden = !isPasswordHidden
                         }

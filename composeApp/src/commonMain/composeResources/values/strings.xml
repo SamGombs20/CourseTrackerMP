@@ -36,6 +36,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="sure">Are you sure?</string>
+    <string name="about_text">Course Tracker helps you keep a clear, lifelong record of every course you've completed — whether for university, professional certifications, online platforms (Coursera, Udemy, edX, LinkedIn Learning), workshops, or bootcamps.</string>
     <string name="duration">Duration</string>
     <string name="name_error">Course name cannot be empty</string>
     <string name="category_error">Course category cannot be empty</string>

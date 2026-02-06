@@ -1,5 +1,6 @@
 package org.work.project.presentation.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,6 +23,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -38,6 +41,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coursetrackermp.composeapp.generated.resources.Res
 import coursetrackermp.composeapp.generated.resources.about
+import coursetrackermp.composeapp.generated.resources.about_text
+import coursetrackermp.composeapp.generated.resources.close
+import coursetrackermp.composeapp.generated.resources.courseTracker
 import coursetrackermp.composeapp.generated.resources.sign_out
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -51,6 +57,7 @@ import org.work.project.presentation.viewmodel.CourseViewModel
 @Composable
 fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
     var expanded by remember { mutableStateOf(false) }
+    var showAbout by remember { mutableStateOf(false) }
     val user by authViewModel.user.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
@@ -117,7 +124,9 @@ fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
                         HorizontalDivider(color = primaryColor, modifier = Modifier.height(8 .dp))
                         DropdownMenuItem(
                             contentPadding = PaddingValues(start = 2 .dp),
-                            onClick = {expanded=false},
+                            onClick = {
+                                showAbout = true
+                                expanded=false },
                             text = {
                                 Text(stringResource(Res.string.about), fontSize = 12 .sp)
                             },
@@ -160,6 +169,43 @@ fun MainScreen( authViewModel: AuthViewModel, courseViewModel: CourseViewModel){
                 HomeScreen(courseViewModel)
 
             }
+            if(showAbout){
+                AlertDialog(
+                    onDismissRequest = {
+                        showAbout = !showAbout
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                showAbout = false
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.close)
+                            )
+                        }
+                    },
+                    title = {
+                        Text(
+                            text = stringResource(Res.string.about)
+                        )
+                    },
+                    text = {
+                        Text(
+                            text = stringResource(Res.string.about_text)
+                        )
+                    },
+                    icon = {
+                        Image(
+                            painter = painterResource(Res.drawable.courseTracker),
+                            contentDescription = null
+                        )
+                    },
+                    confirmButton = {},
+
+                )
+            }
         }
+
     )
 }
