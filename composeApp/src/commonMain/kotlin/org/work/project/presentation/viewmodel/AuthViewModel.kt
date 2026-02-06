@@ -70,7 +70,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
             ))
             if (usr.firstName.isNotEmpty()){
                 _uiState.update { it.copy(isLoading = false) }
-                _authState.value = AuthState.Authenticated(usr)
+                signIn(username, password)
             }
             else{
                 _uiState.update { it.copy(isLoading = false, errorMessage = "Failed to register user") }

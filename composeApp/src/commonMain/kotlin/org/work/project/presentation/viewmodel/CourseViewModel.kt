@@ -21,10 +21,7 @@ class CourseViewModel(private val authApi: AuthApi): ViewModel() {
     fun getCourses(){
         viewModelScope.launch {
             _allCourses.value = authApi.getCourses()
-            if (!_allCourses.value.isEmpty()){
-                _filteredCourses.value = _allCourses.value
-
-            }
+            _filteredCourses.value = _allCourses.value
         }
     }
     fun addCourse(course: CourseCreate){

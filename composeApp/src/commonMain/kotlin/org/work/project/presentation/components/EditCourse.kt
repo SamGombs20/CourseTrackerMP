@@ -263,7 +263,9 @@ fun EditCourse(onClose:(Boolean)-> Unit, course: Course, courseViewModel: Course
                                     description,
                                     status,
                                     if (startDate==null && course.startDate.isNotEmpty()) course.startDate else convertMillisToDate(startDate),
-                                    if (endDate == null && course.endDate.length<5) course.endDate else convertMillisToDate(endDate),
+                                    if (endDate == null || course.endDate.replace(" ", "")
+                                            .isEmpty()
+                                    ) course.endDate else convertMillisToDate(endDate),
                                     rating
                                 )
                             )
