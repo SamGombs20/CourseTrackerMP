@@ -4,6 +4,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -76,8 +77,10 @@ kotlin {
             implementation(libs.koin.annotations)
             implementation("io.ktor:ktor-client-auth:3.4.0")
             implementation(libs.connectivity.core)
-            implementation(libs.connectivity.device)
-            implementation(libs.connectivity.compose.device)
+            implementation(libs.connectivity.compose)
+            implementation(libs.connectivity.http)
+            implementation(libs.connectivity.compose.http)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
