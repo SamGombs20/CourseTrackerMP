@@ -75,6 +75,9 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.annotations)
             implementation("io.ktor:ktor-client-auth:3.4.0")
+            implementation(libs.connectivity.core)
+            implementation(libs.connectivity.device)
+            implementation(libs.connectivity.compose.device)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
