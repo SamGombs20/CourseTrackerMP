@@ -80,7 +80,7 @@ kotlin {
             implementation(libs.connectivity.compose)
             implementation(libs.connectivity.http)
             implementation(libs.connectivity.compose.http)
-            implementation(libs.connectivity.compose.device)
+
 
         }
         commonTest.dependencies {
