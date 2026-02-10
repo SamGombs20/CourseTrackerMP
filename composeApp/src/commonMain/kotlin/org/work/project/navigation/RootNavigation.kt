@@ -9,7 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.jordond.connectivity.Connectivity
-import kotlinx.coroutines.delay
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.AuthState
@@ -19,7 +18,6 @@ import org.work.project.presentation.view.NoInternetScreen
 import org.work.project.presentation.view.SplashScreen
 import org.work.project.presentation.viewmodel.AuthViewModel
 import org.work.project.presentation.viewmodel.CourseViewModel
-import org.work.project.utils.ConnectivityObserver
 import org.work.project.utils.DefaultConnectivityObserver
 
 
@@ -40,28 +38,28 @@ fun RootNavigation(){
         }
     }
 
-    LaunchedEffect(authState){
-        when(authState){
-            is AuthState.Authenticated -> {
-                courseViewModel.getCourses()
-                navController.navigate(Screen.Main.route){
-                    popUpTo(0){
-                        inclusive=true
+    if (status.isConnected){
+        LaunchedEffect(authState){
+            when(authState){
+                is AuthState.Authenticated -> {
+                    courseViewModel.getCourses()
+                    navController.navigate(Screen.Main.route){
+                        popUpTo(0){
+                            inclusive=true
+                        }
                     }
                 }
-            }
-            is AuthState.Error -> {}
-            AuthState.Loading -> {}
-            AuthState.Unauthenticated -> {
-                navController.navigate(Screen.Splash.route){
-                    popUpTo(0){
-                        inclusive = true
+                is AuthState.Error -> {}
+                AuthState.Loading -> {}
+                AuthState.Unauthenticated -> {
+                    navController.navigate(Screen.Splash.route){
+                        popUpTo(0){
+                            inclusive = true
+                        }
                     }
                 }
             }
         }
-    }
-    if (status.isConnected){
         NavHost(
             navController = navController,
             startDestination = Screen.Splash.route
