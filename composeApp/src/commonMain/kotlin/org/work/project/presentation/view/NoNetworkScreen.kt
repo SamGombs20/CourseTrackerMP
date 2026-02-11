@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,15 +20,20 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun NoInternetScreen(){
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
-        Column {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment= Alignment.CenterHorizontally
+        ) {
             Icon(
                 painter = painterResource(Res.drawable.no_internet),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.error
+                tint = MaterialTheme.colorScheme.error,
+                modifier = Modifier.size(50 .dp)
             )
             Spacer(Modifier.height(16 .dp))
             Text(

@@ -37,7 +37,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage,
     val authState: StateFlow<AuthState> = _authState.asStateFlow()
 
     private val _status = connectivityObserver.status
-    val status = _status
+
     fun getMessage(){
         viewModelScope.launch {
             _status.collect {
@@ -53,26 +53,35 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage,
     }
     fun signIn(username:String, password: String){
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
-            val result = authApi.signIn(username, password)
-            _uiState.update { it.copy(isLoading = false) }
-            when{
-                result.isSuccess -> {
-                    val token = result.getOrNull()!!
-                    tokenStorage.saveTokens(token.accessToken, token.refreshToken)
-                    if (tokenStorage.getAccessToken()!=null){
-                        val usr = authApi.getUser()
-                        _authState.value = AuthState.Authenticated(usr)
-                        _user.value = usr
-                    }
+            _status.collect { status ->
+                when(status){
+                    is Connectivity.Status.Connected -> {
+                        _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+                        val result = authApi.signIn(username, password)
+                        _uiState.update { it.copy(isLoading = false) }
+                        when{
+                            result.isSuccess -> {
+                                val token = result.getOrNull()!!
+                                tokenStorage.saveTokens(token.accessToken, token.refreshToken)
+                                if (tokenStorage.getAccessToken()!=null){
+                                    val usr = authApi.getUser()
+                                    _authState.value = AuthState.Authenticated(usr)
+                                    _user.value = usr
+                                }
 //                    _uiEvents.send(SignInUiEvent.NavigateToHome)
-                }
-                else->{
-                    val msg = when{
-                        result.exceptionOrNull()!=null -> result.exceptionOrNull()?.message?:""
-                        else-> "Network Error"
+                            }
+                            else->{
+                                val msg = when{
+                                    result.exceptionOrNull()!=null -> result.exceptionOrNull()?.message?:""
+                                    else-> "Network Error"
+                                }
+                                _uiEvents.send(SignInUiEvent.ShowError(msg))
+                            }
+                        }
                     }
-                    _uiEvents.send(SignInUiEvent.ShowError(msg))
+                    Connectivity.Status.Disconnected -> {
+                        _uiEvents.send(SignInUiEvent.ShowError("No internet connection"))
+                    }
                 }
             }
         }
