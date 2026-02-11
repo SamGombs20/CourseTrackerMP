@@ -87,7 +87,7 @@ fun RootNavigation(){
             AuthScreen( authViewModel)
         }
         composable(Screen.NoInternet.route) {
-            NoInternetScreen()
+            NoInternetScreen(connectivity)
         }
 //        composable(Screen.Register.route) {
 //            RegisterScreen {

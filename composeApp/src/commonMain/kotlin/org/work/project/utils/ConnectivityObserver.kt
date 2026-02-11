@@ -11,9 +11,7 @@ interface ConnectivityObserver {
 class DefaultConnectivityObserver: ConnectivityObserver{
     private val connectivity = Connectivity{
         urls("8.8.8.8", "1.1.1.1")
-        port=443
-        pollingIntervalMs =1000L
-        timeoutMs=500L
+
     }
     override val status: Flow<Boolean> = connectivity.statusUpdates.map {
         it is Connectivity.Status.Connected

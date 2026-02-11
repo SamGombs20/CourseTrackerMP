@@ -35,6 +35,7 @@
     <string name="delete">Delete</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="try">Try again</string>
     <string name="sure">Are you sure?</string>
     <string name="no_internet">Waiting for internet...</string>
     <string name="splash_text">Keeping track...</string>
