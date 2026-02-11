@@ -2,7 +2,6 @@ package org.work.project.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.jordond.connectivity.Connectivity
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,11 +41,13 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage,
         viewModelScope.launch {
             _status.collect {
                 when(it){
-                    is Connectivity.Status.Connected -> {
+                    true -> {
                         val result = authApi.getMessage()
                         _message.value = result.message
                     }
-                    Connectivity.Status.Disconnected -> {}
+                    false -> {
+
+                    }
                 }
             }
         }
@@ -55,7 +56,7 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage,
         viewModelScope.launch {
             _status.collect { status ->
                 when(status){
-                    is Connectivity.Status.Connected -> {
+                    true -> {
                         _uiState.update { it.copy(isLoading = true, errorMessage = null) }
                         val result = authApi.signIn(username, password)
                         _uiState.update { it.copy(isLoading = false) }
@@ -79,8 +80,8 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage,
                             }
                         }
                     }
-                    Connectivity.Status.Disconnected -> {
-                        _uiEvents.send(SignInUiEvent.ShowError("No internet connection"))
+                    false -> {
+                        _uiEvents.send(SignInUiEvent.ShowError("Waiting for internet..."))
                     }
                 }
             }

@@ -9,8 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.jordond.connectivity.Connectivity
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.debounce
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.work.project.model.user.AuthState
@@ -37,17 +35,24 @@ fun RootNavigation(){
             connectivity.stop()
         }
     }
+    LaunchedEffect(Unit) {
+        connectivity.status.collect { newValue ->
+            println("RAW CONNECTIVITY EMISSION → $newValue (type: ${newValue::class.simpleName})")
+        }
+    }
     val status by connectivity.status
-        .collectAsStateWithLifecycle(initialValue = Connectivity.Status.Disconnected)
-    LaunchedEffect(authState, status){
+        .collectAsStateWithLifecycle(initialValue = true)
+    LaunchedEffect(key1 = status, key2 = authState ){
+        val currentRoute = navController.currentDestination?.route
+        println("→ Connectivity: $status | Auth: $authState | Current route: $currentRoute")
         when(status){
-            is Connectivity.Status.Connected -> {
+            true -> {
                 when(authState){
                     is AuthState.Authenticated -> {
                         courseViewModel.getCourses()
-                        navController.navigate(Screen.Main.route){
-                            popUpTo(0){
-                                inclusive=true
+                        if (currentRoute != Screen.Main.route) {
+                            navController.navigate(Screen.Main.route) {
+                                popUpTo(navController.graph.startDestinationId) { inclusive = true }
                             }
                         }
                     }
@@ -56,15 +61,16 @@ fun RootNavigation(){
                     }
                     AuthState.Loading -> {}
                     AuthState.Unauthenticated -> {
-                        navController.navigate(Screen.Splash.route){
-                            popUpTo(0){
-                                inclusive = true
+                        if (currentRoute != Screen.Splash.route &&
+                            currentRoute != Screen.Login.route) {
+                            navController.navigate(Screen.Splash.route) {
+                                popUpTo(navController.graph.startDestinationId) { inclusive = true }
                             }
                         }
                     }
                 }
             }
-            Connectivity.Status.Disconnected -> {
+            false -> {
                 navController.navigate(Screen.NoInternet.route)
             }
 
