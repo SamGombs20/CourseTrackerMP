@@ -18,7 +18,6 @@ import org.work.project.presentation.view.NoInternetScreen
 import org.work.project.presentation.view.SplashScreen
 import org.work.project.presentation.viewmodel.AuthViewModel
 import org.work.project.presentation.viewmodel.CourseViewModel
-import org.work.project.utils.DefaultConnectivityObserver
 
 
 @Composable
@@ -27,18 +26,8 @@ fun RootNavigation(){
     val authViewModel: AuthViewModel = koinViewModel()
     val courseViewModel: CourseViewModel = koinViewModel()
     val authState  by authViewModel.authState.collectAsStateWithLifecycle()
-    val connectivityObserver: DefaultConnectivityObserver = koinInject()
-    val status by connectivityObserver.status.collectAsStateWithLifecycle(initialValue = Connectivity.Status.Disconnected)
-    LaunchedEffect(Unit){
-        connectivityObserver.start()
-    }
-    DisposableEffect(Unit){
-        onDispose {
-            connectivityObserver.stop()
-        }
-    }
 
-    if (status.isConnected){
+
         LaunchedEffect(authState){
             when(authState){
                 is AuthState.Authenticated -> {
@@ -70,6 +59,9 @@ fun RootNavigation(){
             composable(Screen.Login.route) {
                 AuthScreen( authViewModel)
             }
+            composable(Screen.NoInternet.route) {
+                NoInternetScreen()
+            }
 //        composable(Screen.Register.route) {
 //            RegisterScreen {
 //                navController.navigate(Screen.Login.route)
@@ -79,8 +71,5 @@ fun RootNavigation(){
                 MainScreen(authViewModel, courseViewModel)
             }
         }
-    }
-    else{
-        NoInternetScreen()
-    }
+
 }

@@ -2,6 +2,7 @@ package org.work.project.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.jordond.connectivity.Connectivity
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,10 +17,13 @@ import org.work.project.model.user.SignInUiState
 import org.work.project.model.user.User
 import org.work.project.model.user.UserCreate
 import org.work.project.utils.AuthTokenStorage
+import org.work.project.utils.DefaultConnectivityObserver
 
 
-class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val authApi: AuthApi): ViewModel() {
+class AuthViewModel(private val tokenStorage: AuthTokenStorage,
+                    private val authApi: AuthApi, private val connectivityObserver: DefaultConnectivityObserver): ViewModel() {
     private val _message = MutableStateFlow("")
+    val message: StateFlow<String> = _message.asStateFlow()
     private val _uiState = MutableStateFlow(SignInUiState())
     val uiState: StateFlow<SignInUiState> = _uiState.asStateFlow()
 
@@ -32,10 +36,19 @@ class AuthViewModel(private val tokenStorage: AuthTokenStorage, private val auth
     private val _authState = MutableStateFlow<AuthState>(AuthState.Unauthenticated)
     val authState: StateFlow<AuthState> = _authState.asStateFlow()
 
+    private val _status = connectivityObserver.status
+    val status = _status
     fun getMessage(){
         viewModelScope.launch {
-            val result = authApi.getMessage()
-            _message.value = result.message
+            _status.collect {
+                when(it){
+                    is Connectivity.Status.Connected -> {
+                        val result = authApi.getMessage()
+                        _message.value = result.message
+                    }
+                    Connectivity.Status.Disconnected -> {}
+                }
+            }
         }
     }
     fun signIn(username:String, password: String){

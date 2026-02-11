@@ -11,6 +11,6 @@ val sharedModule = module {
     single { AuthApi(get()) }
     single { DefaultConnectivityObserver() }
     single{ AuthTokenStorage() }
-    single{ AuthViewModel(get(), get()) }
+    single{ AuthViewModel(get(), get(), get()) }
     single{ CourseViewModel(get()) }
 }
