@@ -23,7 +23,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.work.project.utils.DefaultConnectivityObserver
 
 @Composable
-fun NoInternetScreen(connectivityObserver: DefaultConnectivityObserver){
+fun NoInternetScreen(onRetry:()-> Unit, connectivityObserver: DefaultConnectivityObserver){
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -47,6 +47,7 @@ fun NoInternetScreen(connectivityObserver: DefaultConnectivityObserver){
             TextButton(
                 onClick = {
                     connectivityObserver.start()
+                    onRetry()
                 }
             ){
                 Text(

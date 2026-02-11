@@ -4,6 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -28,7 +31,7 @@ fun RootNavigation(){
     val courseViewModel: CourseViewModel = koinViewModel()
     val authState  by authViewModel.authState.collectAsStateWithLifecycle()
     val connectivity: DefaultConnectivityObserver = koinInject()
-
+    var refreshTrigger by remember { mutableStateOf(0) }
     DisposableEffect(Unit){
         connectivity.start()
         onDispose {
@@ -42,7 +45,7 @@ fun RootNavigation(){
     }
     val status by connectivity.status
         .collectAsStateWithLifecycle(initialValue = true)
-    LaunchedEffect(key1 = status, key2 = authState ){
+    LaunchedEffect(key1 = status, key2 = authState, refreshTrigger ){
         val currentRoute = navController.currentDestination?.route
         println("→ Connectivity: $status | Auth: $authState | Current route: $currentRoute")
         when(status){
@@ -87,7 +90,12 @@ fun RootNavigation(){
             AuthScreen( authViewModel)
         }
         composable(Screen.NoInternet.route) {
-            NoInternetScreen(connectivity)
+            NoInternetScreen(
+                connectivityObserver = connectivity,
+                onRetry = {
+                    refreshTrigger++
+                }
+            )
         }
 //        composable(Screen.Register.route) {
 //            RegisterScreen {
